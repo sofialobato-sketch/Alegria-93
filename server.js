@@ -2,16 +2,13 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-// ============================================================
-// CONFIGURAÇÃO — preenche estas variáveis no teu ambiente
-// ============================================================
 const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
 
-// ============================================================
-// INSTRUÇÕES DO APARTAMENTO (sistema de IA)
-// ============================================================
+// Guarda os IDs das mensagens já respondidas (evita responder duas vezes)
+const respondedMessageIds = new Set();
+
 const APARTMENT_SYSTEM_PROMPT = `
 És um assistente virtual simpático e profissional do apartamento "Alegria 93", situado na Rua da Alegria, 93, 4.º andar, Porto, Portugal.
 
@@ -105,6 +102,16 @@ Cortês, simpático e profissional. Respostas concisas e claras.
 // FUNÇÕES DE API
 // ============================================================
 
+async function getRecentBookings() {
+  const today = new Date().toISOString().split('T')[0];
+  const future = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const response = await fetch(
+    `https://login.smoobu.com/api/reservations?arrivalFrom=${today}&arrivalTo=${future}&pageSize=50`,
+    { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
+  );
+  return response.json();
+}
+
 async function getReservationMessages(reservationId) {
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages`,
@@ -118,10 +125,7 @@ async function sendMessageToGuest(reservationId, messageBody) {
     `https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-guest`,
     {
       method: 'POST',
-      headers: {
-        'Api-Key': SMOOBU_API_KEY,
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Api-Key': SMOOBU_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ messageBody }),
     }
   );
@@ -134,10 +138,7 @@ async function sendAlertToHost(reservationId, guestMessage) {
     `https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-host`,
     {
       method: 'POST',
-      headers: {
-        'Api-Key': SMOOBU_API_KEY,
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Api-Key': SMOOBU_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({ messageBody: alertBody, internal: true }),
     }
   );
@@ -145,11 +146,7 @@ async function sendAlertToHost(reservationId, guestMessage) {
 }
 
 async function generateAIResponse(guestMessage, conversationHistory = []) {
-  const messages = [
-    ...conversationHistory,
-    { role: 'user', content: guestMessage },
-  ];
-
+  const messages = [...conversationHistory, { role: 'user', content: guestMessage }];
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -164,12 +161,10 @@ async function generateAIResponse(guestMessage, conversationHistory = []) {
       messages,
     }),
   });
-
   const data = await response.json();
   return data.content?.[0]?.text || null;
 }
 
-// Detecta se a mensagem precisa de escalada
 function needsEscalation(aiResponse) {
   const escalationPhrases = [
     "passing this to our host",
@@ -183,66 +178,89 @@ function needsEscalation(aiResponse) {
 }
 
 // ============================================================
-// WEBHOOK — recebe notificações do Smoobu
+// POLLING — verifica mensagens novas a cada 60 segundos
+// ============================================================
+async function checkNewMessages() {
+  console.log('🔍 A verificar mensagens novas...');
+  try {
+    // Vai buscar reservas ativas (próximos 90 dias + últimos 7 dias)
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const future = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    
+    const response = await fetch(
+      `https://login.smoobu.com/api/reservations?departureFrom=${sevenDaysAgo}&arrivalTo=${future}&pageSize=50`,
+      { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
+    );
+    const data = await response.json();
+    const bookings = data.bookings || [];
+
+    for (const booking of bookings) {
+      try {
+        const messagesData = await getReservationMessages(booking.id);
+        const messages = messagesData.messages || [];
+
+        // Encontra mensagens de hóspedes (type=1) ainda não respondidas
+        for (let i = 0; i < messages.length; i++) {
+          const msg = messages[i];
+          
+          // Só mensagens de hóspedes (inbox = type 1)
+          if (msg.type !== 1) continue;
+          
+          // Já respondemos a esta mensagem?
+          if (respondedMessageIds.has(msg.id)) continue;
+          
+          // Verifica se a mensagem seguinte já é uma resposta nossa (type 2)
+          const nextMsg = messages[i + 1];
+          if (nextMsg && nextMsg.type === 2) {
+            respondedMessageIds.add(msg.id);
+            continue;
+          }
+          
+          // É a última mensagem e é do hóspede — responder!
+          const isLastMessage = i === messages.length - 1;
+          if (!isLastMessage) continue;
+
+          console.log(`💬 Nova mensagem na reserva ${booking.id}: ${msg.message}`);
+
+          // Histórico para contexto
+          const history = messages.slice(0, i).map(m => ({
+            role: m.type === 1 ? 'user' : 'assistant',
+            content: m.message,
+          }));
+
+          const aiResponse = await generateAIResponse(msg.message, history);
+          if (!aiResponse) continue;
+
+          console.log(`🤖 Resposta IA: ${aiResponse}`);
+          await sendMessageToGuest(booking.id, aiResponse);
+          respondedMessageIds.add(msg.id);
+          console.log(`✅ Resposta enviada (reserva ${booking.id})`);
+
+          if (needsEscalation(aiResponse)) {
+            await sendAlertToHost(booking.id, msg.message);
+            console.log(`🚨 Anfitrião alertado`);
+          }
+        }
+      } catch (e) {
+        console.warn(`Erro na reserva ${booking.id}:`, e.message);
+      }
+    }
+  } catch (e) {
+    console.error('Erro no polling:', e.message);
+  }
+}
+
+// Inicia o polling — verifica a cada 60 segundos
+setInterval(checkNewMessages, 60 * 1000);
+// Primeira verificação imediata ao arrancar
+setTimeout(checkNewMessages, 3000);
+
+// ============================================================
+// WEBHOOK (mantido como backup)
 // ============================================================
 app.post('/webhook', async (req, res) => {
   console.log('📩 Webhook recebido:', JSON.stringify(req.body, null, 2));
-
-  try {
-    const { reservation, type } = req.body;
-
-    // Só processa mensagens novas de hóspedes
-    if (type !== 'new_message' && type !== 'message') {
-      return res.json({ status: 'ignored', reason: 'not a message event' });
-    }
-
-    const reservationId = reservation?.id;
-    const guestMessage = req.body.message?.text || req.body.message?.message;
-
-    if (!reservationId || !guestMessage) {
-      return res.status(400).json({ error: 'Missing reservationId or message' });
-    }
-
-    console.log(`💬 Hóspede (reserva ${reservationId}): ${guestMessage}`);
-
-    // Vai buscar histórico da conversa para contexto
-    let conversationHistory = [];
-    try {
-      const messagesData = await getReservationMessages(reservationId);
-      const messages = messagesData.messages || [];
-      conversationHistory = messages.slice(-10).map(m => ({
-        role: m.type === 1 ? 'user' : 'assistant',
-        content: m.message,
-      }));
-    } catch (e) {
-      console.warn('Não foi possível carregar histórico:', e.message);
-    }
-
-    // Gera resposta com IA
-    const aiResponse = await generateAIResponse(guestMessage, conversationHistory);
-
-    if (!aiResponse) {
-      throw new Error('A IA não devolveu resposta');
-    }
-
-    console.log(`🤖 Resposta IA: ${aiResponse}`);
-
-    // Envia resposta ao hóspede
-    await sendMessageToGuest(reservationId, aiResponse);
-    console.log(`✅ Resposta enviada ao hóspede`);
-
-    // Se precisar de escalada, alerta também o anfitrião
-    if (needsEscalation(aiResponse)) {
-      await sendAlertToHost(reservationId, guestMessage);
-      console.log(`🚨 Anfitrião alertado para escalada`);
-    }
-
-    res.json({ status: 'success', responded: true, escalated: needsEscalation(aiResponse) });
-
-  } catch (error) {
-    console.error('❌ Erro no webhook:', error);
-    res.status(500).json({ error: error.message });
-  }
+  res.json({ status: 'received' });
 });
 
 // Health check
@@ -250,10 +268,12 @@ app.get('/', (req, res) => {
   res.json({
     status: 'online',
     service: 'Alegria 93 — AI Guest Assistant',
+    respondedMessages: respondedMessageIds.size,
     timestamp: new Date().toISOString(),
   });
 });
 
 app.listen(PORT, () => {
   console.log(`🏠 Assistente Alegria 93 a correr na porta ${PORT}`);
+  console.log(`🔄 Polling ativo — a verificar mensagens a cada 60 segundos`);
 });
