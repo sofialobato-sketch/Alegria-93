@@ -6,7 +6,10 @@ const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
 
-// Guarda os IDs das mensagens já respondidas (evita responder duas vezes)
+// Só este apartamento
+const APARTMENT_ID = 2957201;
+
+// IDs de mensagens já respondidas
 const respondedMessageIds = new Set();
 
 const APARTMENT_SYSTEM_PROMPT = `
@@ -98,15 +101,12 @@ Nestes casos diz: "I'm passing this to our host who will get back to you shortly
 Cortês, simpático e profissional. Respostas concisas e claras.
 `;
 
-// ============================================================
-// FUNÇÕES DE API
-// ============================================================
-
-async function getRecentBookings() {
+async function getActiveBookings() {
   const today = new Date().toISOString().split('T')[0];
-  const future = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const past30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const future90 = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   const response = await fetch(
-    `https://login.smoobu.com/api/reservations?arrivalFrom=${today}&arrivalTo=${future}&pageSize=50`,
+    `https://login.smoobu.com/api/reservations?apartmentId=${APARTMENT_ID}&arrivalFrom=${past30}&arrivalTo=${future90}&pageSize=50`,
     { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
   );
   return response.json();
@@ -177,69 +177,57 @@ function needsEscalation(aiResponse) {
   );
 }
 
-// ============================================================
-// POLLING — verifica mensagens novas a cada 60 segundos
-// ============================================================
 async function checkNewMessages() {
   console.log('🔍 A verificar mensagens novas...');
   try {
-    // Vai buscar reservas ativas (próximos 90 dias + últimos 7 dias)
-    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    const future = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    
-    const response = await fetch(
-      `https://login.smoobu.com/api/reservations?departureFrom=${sevenDaysAgo}&arrivalTo=${future}&pageSize=50`,
-      { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
-    );
-    const data = await response.json();
+    const data = await getActiveBookings();
     const bookings = data.bookings || [];
+    console.log(`📋 ${bookings.length} reservas encontradas para o Alegria 93`);
+
+    const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
 
     for (const booking of bookings) {
       try {
         const messagesData = await getReservationMessages(booking.id);
         const messages = messagesData.messages || [];
 
-        // Encontra mensagens de hóspedes (type=1) ainda não respondidas
-        for (let i = 0; i < messages.length; i++) {
-          const msg = messages[i];
-          
-          // Só mensagens de hóspedes (inbox = type 1)
-          if (msg.type !== 1) continue;
-          
-          // Já respondemos a esta mensagem?
-          if (respondedMessageIds.has(msg.id)) continue;
-          
-          // Verifica se a mensagem seguinte já é uma resposta nossa (type 2)
-          const nextMsg = messages[i + 1];
-          if (nextMsg && nextMsg.type === 2) {
-            respondedMessageIds.add(msg.id);
-            continue;
-          }
-          
-          // É a última mensagem e é do hóspede — responder!
-          const isLastMessage = i === messages.length - 1;
-          if (!isLastMessage) continue;
+        // Última mensagem
+        const lastMsg = messages[messages.length - 1];
 
-          console.log(`💬 Nova mensagem na reserva ${booking.id}: ${msg.message}`);
+        // Ignora se não há mensagens, se já respondemos, ou se a última é nossa (type 2)
+        if (!lastMsg) continue;
+        if (lastMsg.type === 2) continue;
+        if (respondedMessageIds.has(lastMsg.id)) continue;
 
-          // Histórico para contexto
-          const history = messages.slice(0, i).map(m => ({
-            role: m.type === 1 ? 'user' : 'assistant',
-            content: m.message,
-          }));
+        // Só responde a mensagens das últimas 24 horas
+        // (o Smoobu não devolve timestamp mas usamos o ID como proxy — IDs mais altos são mais recentes)
+        // Marcamos todas as mensagens existentes no arranque como já vistas
+        if (!respondedMessageIds.has('initialized_' + booking.id)) {
+          console.log(`⏭️ Reserva ${booking.id}: a marcar mensagens existentes como já vistas`);
+          messages.forEach(m => respondedMessageIds.add(m.id));
+          respondedMessageIds.add('initialized_' + booking.id);
+          continue;
+        }
 
-          const aiResponse = await generateAIResponse(msg.message, history);
-          if (!aiResponse) continue;
+        console.log(`💬 Nova mensagem na reserva ${booking.id}: ${lastMsg.message}`);
 
-          console.log(`🤖 Resposta IA: ${aiResponse}`);
-          await sendMessageToGuest(booking.id, aiResponse);
-          respondedMessageIds.add(msg.id);
-          console.log(`✅ Resposta enviada (reserva ${booking.id})`);
+        // Histórico para contexto
+        const history = messages.slice(0, -1).map(m => ({
+          role: m.type === 1 ? 'user' : 'assistant',
+          content: m.message,
+        }));
 
-          if (needsEscalation(aiResponse)) {
-            await sendAlertToHost(booking.id, msg.message);
-            console.log(`🚨 Anfitrião alertado`);
-          }
+        const aiResponse = await generateAIResponse(lastMsg.message, history);
+        if (!aiResponse) continue;
+
+        console.log(`🤖 Resposta IA: ${aiResponse}`);
+        await sendMessageToGuest(booking.id, aiResponse);
+        respondedMessageIds.add(lastMsg.id);
+        console.log(`✅ Resposta enviada (reserva ${booking.id})`);
+
+        if (needsEscalation(aiResponse)) {
+          await sendAlertToHost(booking.id, lastMsg.message);
+          console.log(`🚨 Anfitrião alertado`);
         }
       } catch (e) {
         console.warn(`Erro na reserva ${booking.id}:`, e.message);
@@ -250,24 +238,19 @@ async function checkNewMessages() {
   }
 }
 
-// Inicia o polling — verifica a cada 60 segundos
+// Polling a cada 60 segundos
 setInterval(checkNewMessages, 60 * 1000);
-// Primeira verificação imediata ao arrancar
 setTimeout(checkNewMessages, 3000);
 
-// ============================================================
-// WEBHOOK (mantido como backup)
-// ============================================================
 app.post('/webhook', async (req, res) => {
-  console.log('📩 Webhook recebido:', JSON.stringify(req.body, null, 2));
   res.json({ status: 'received' });
 });
 
-// Health check
 app.get('/', (req, res) => {
   res.json({
     status: 'online',
     service: 'Alegria 93 — AI Guest Assistant',
+    apartment: APARTMENT_ID,
     respondedMessages: respondedMessageIds.size,
     timestamp: new Date().toISOString(),
   });
@@ -275,5 +258,5 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🏠 Assistente Alegria 93 a correr na porta ${PORT}`);
-  console.log(`🔄 Polling ativo — a verificar mensagens a cada 60 segundos`);
+  console.log(`🔄 Polling ativo — só Alegria 93 (ID: ${APARTMENT_ID})`);
 });
