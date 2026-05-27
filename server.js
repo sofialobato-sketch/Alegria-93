@@ -3442,8 +3442,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="section-body">
       <div class="place">
-        <div class="place-name" data-en="Nearest supermarket" data-pt="Supermercado mais próximo" data-es="Supermercado más cercano" data-fr="Supermarché le plus proche">Nearest supermarket</div>
-        <a href="https://goo.gl/maps/RFhBsYGyd4VQPcfK6" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+        <div class="place-header"><div class="place-name">Pingo Doce</div><div class="place-rating">⭐ 4.1 · 1.6k reviews</div></div>
+        <div class="place-desc" data-en="Full supermarket at Praça Alvalade 6. Wide variety, open daily." data-pt="Supermercado completo na Praça Alvalade 6. Grande variedade, aberto todos os dias." data-es="Supermercado completo en Praça Alvalade 6. Gran variedad, abierto todos los días." data-fr="Supermarché complet à Praça Alvalade 6. Grande variété, ouvert tous les jours.">Full supermarket at Praça Alvalade 6. Wide variety, open daily.</div>
+        <div class="place-meta" data-en="Daily 8:00–21:00" data-pt="Diário 8h–21h" data-es="Diario 8:00–21:00" data-fr="Quotidien 8h–21h">Daily 8:00–21:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJm9G0vKozGQ0R0oESAguqmTg" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Continente Bom Dia</div><div class="place-rating">⭐ 4.0 · 1.3k reviews</div></div>
+        <div class="place-desc" data-en="Rua Acácio de Paiva 22. Has a bakery and coffee area. Free parking for customers." data-pt="Rua Acácio de Paiva 22. Tem padaria e zona de café. Estacionamento grátis para clientes." data-es="Rua Acácio de Paiva 22. Tiene panadería y zona de café. Aparcamiento gratis para clientes." data-fr="Rua Acácio de Paiva 22. Boulangerie et espace café. Parking gratuit pour les clients.">Rua Acácio de Paiva 22. Has a bakery and coffee area. Free parking for customers.</div>
+        <div class="place-meta" data-en="Daily 8:00–21:00" data-pt="Diário 8h–21h" data-es="Diario 8:00–21:00" data-fr="Quotidien 8h–21h">Daily 8:00–21:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ2cFjGFUyGQ0Rwsz5oB8lm7o" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Lidl</div><div class="place-rating">⭐ 4.0 · 1.7k reviews</div></div>
+        <div class="place-desc" data-en="Avenida Rio de Janeiro 26. Great value, next to the local market." data-pt="Avenida Rio de Janeiro 26. Ótima relação qualidade-preço, ao lado do mercado local." data-es="Avenida Rio de Janeiro 26. Excelente relación calidad-precio, junto al mercado local." data-fr="Avenida Rio de Janeiro 26. Excellent rapport qualité-prix, à côté du marché local.">Avenida Rio de Janeiro 26. Great value, next to the local market.</div>
+        <div class="place-meta" data-en="Daily 8:00–21:00" data-pt="Diário 8h–21h" data-es="Diario 8:00–21:00" data-fr="Quotidien 8h–21h">Daily 8:00–21:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJo8MjoVQyGQ0R_wBZXtZkSxg" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
     </div>
   </div>
@@ -3456,7 +3470,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="section-body">
       <div class="service-item">
-        <div class="service-name" data-en="Metro — Alvalade (Yellow Line)" data-pt="Metro — Alvalade (Linha Amarela)" data-es="Metro — Alvalade (Línea Amarilla)" data-fr="Métro — Alvalade (Ligne Jaune)">Metro — Alvalade (Yellow Line)</div>
+        <div class="service-name" data-en="Metro — Alvalade (Green Line)" data-pt="Metro — Alvalade (Linha Verde)" data-es="Metro — Alvalade (Línea Verde)" data-fr="Métro — Alvalade (Ligne Verte)">Metro — Alvalade (Green Line)</div>
         <div class="service-desc" data-en="~5 min walk. Connects to Marquês de Pombal, Rossio, airport and all main points." data-pt="~5 min a pé. Liga ao Marquês de Pombal, Rossio, aeroporto e todos os principais pontos." data-es="~5 min andando. Conecta con Marquês de Pombal, Rossio, aeropuerto y todos los puntos principales." data-fr="~5 min à pied. Connecte au Marquês de Pombal, Rossio, aéroport et tous les points principaux.">~5 min walk. Connects to Marquês de Pombal, Rossio, airport and all main points.</div>
         <a href="https://goo.gl/maps/6ttacDpZ64XjFSd89" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
@@ -3474,17 +3488,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="section-chevron">›</div>
     </div>
     <div class="section-body">
-      <div class="place">
-        <div class="place-name" data-en="⚠️ No parking on Rua Alberto Oliveira!" data-pt="⚠️ Sem estacionamento na Rua Alberto Oliveira!" data-es="⚠️ ¡Sin aparcamiento en Rua Alberto Oliveira!" data-fr="⚠️ Pas de stationnement Rua Alberto Oliveira !">⚠️ No parking on Rua Alberto Oliveira!</div>
-        <div class="place-desc" data-en="Resident parking only — police are very strict. Please do not park on this street." data-pt="Apenas para residentes — a polícia é implacável. Por favor, não estacione nesta rua." data-es="Solo para residentes — la policía es implacable. Por favor, no aparques en esta calle." data-fr="Stationnement réservé aux résidents — la police est stricte. Ne stationnez pas dans cette rue.">Resident parking only — police are very strict. Please do not park on this street.</div>
+      <div class="notice" style="background:#fff1f1;border:1px solid #fecaca;border-radius:8px;padding:0.75rem 1rem;margin-bottom:12px;display:flex;gap:8px;">
+        <span>⚠️</span>
+        <p data-en="No parking on Rua Alberto Oliveira — residents only and police are very strict!" data-pt="Sem estacionamento na Rua Alberto Oliveira — só residentes e a polícia é implacável!" data-es="Sin aparcamiento en Rua Alberto Oliveira — solo residentes, ¡la policía es muy estricta!" data-fr="Pas de stationnement Rua Alberto Oliveira — résidents uniquement et la police est stricte !">No parking on Rua Alberto Oliveira — residents only and police are very strict!</p>
       </div>
       <div class="place">
-        <div class="place-name" data-en="Avenida da Igreja — street parking" data-pt="Avenida da Igreja — estacionamento na rua" data-es="Avenida da Igreja — aparcamiento en calle" data-fr="Avenida da Igreja — stationnement en rue">Avenida da Igreja — street parking</div>
-        <div class="place-desc" data-en="€1/h · 9:00–19:00 (Mon–Fri). Free evenings and weekends!" data-pt="€1/h · 9h–19h (Seg–Sex). Gratuito à noite e fins de semana!" data-es="€1/h · 9:00–19:00 (Lun–Vie). ¡Gratuito por la noche y fines de semana!" data-fr="€1/h · 9h–19h (Lun–Ven). Gratuit le soir et le week-end !">€1/h · 9:00–19:00 (Mon–Fri). Free evenings and weekends!</div>
+        <div class="place-name" data-en="Avenida da Igreja — street parking (paid)" data-pt="Avenida da Igreja — estacionamento na rua (pago)" data-es="Avenida da Igreja — aparcamiento en calle (de pago)" data-fr="Avenida da Igreja — stationnement en rue (payant)">Avenida da Igreja — street parking (paid)</div>
+        <div class="place-desc" data-en="Paid parking Mon–Fri during the day. Free evenings and weekends! Check the meters for current rates." data-pt="Estacionamento pago Seg–Sex durante o dia. Gratuito à noite e fins de semana! Consulta os parquímetros para os valores actuais." data-es="Aparcamiento de pago Lun–Vie durante el día. ¡Gratuito por la noche y fines de semana! Consulta los parquímetros para las tarifas actuales." data-fr="Stationnement payant Lun–Ven en journée. Gratuit le soir et le week-end ! Consultez les horodateurs pour les tarifs actuels.">Paid parking Mon–Fri during the day. Free evenings and weekends! Check the meters for current rates.</div>
       </div>
       <div class="place">
-        <div class="place-name" data-en="Private car park — Centro Comercial Alvalade" data-pt="Parque privado — Centro Comercial Alvalade" data-es="Aparcamiento privado — Centro Comercial Alvalade" data-fr="Parking privé — Centro Comercial Alvalade">Private car park — Centro Comercial Alvalade</div>
-        <a href="https://www.google.pt/maps/place/Centro+Comercial+Alvalade" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+        <div class="place-header"><div class="place-name" data-en="Estacionamento CC Alvalade (underground)" data-pt="Estacionamento CC Alvalade (subterrâneo)" data-es="Estacionamiento CC Alvalade (subterráneo)" data-fr="Parking CC Alvalade (souterrain)">Estacionamento CC Alvalade (underground)</div></div>
+        <div class="place-desc" data-en="Covered car park under the shopping centre. Via Verde accepted. Access to Pingo Doce." data-pt="Parque coberto sob o centro comercial. Via Verde aceite. Acesso ao Pingo Doce." data-es="Aparcamiento cubierto bajo el centro comercial. Via Verde aceptado. Acceso al Pingo Doce." data-fr="Parking couvert sous le centre commercial. Via Verde accepté. Accès au Pingo Doce.">Covered car park under the shopping centre. Via Verde accepted. Access to Pingo Doce.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJoS44CkwzGQ0ReRidfmtokGQ" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name" data-en="Parque Mercado de Alvalade" data-pt="Parque Mercado de Alvalade" data-es="Parque Mercado de Alvalade" data-fr="Parque Mercado de Alvalade">Parque Mercado de Alvalade</div></div>
+        <div class="place-desc" data-en="Near Lidl and the local market. Convenient for shopping." data-pt="Perto do Lidl e do mercado local. Conveniente para compras." data-es="Cerca del Lidl y del mercado local. Conveniente para las compras." data-fr="Près du Lidl et du marché local. Pratique pour faire les courses.">Near Lidl and the local market. Convenient for shopping.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ6RFnQAAzGQ0RgqtW-hy-uNI" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Parque Alvalade XXI Telpark</div><div class="place-rating">⭐ open 24h</div></div>
+        <div class="place-desc" data-en="24h covered car park near the stadium. Good option for overnight parking." data-pt="Parque coberto 24h perto do estádio. Boa opção para estacionamento nocturno." data-es="Aparcamiento cubierto 24h cerca del estadio. Buena opción para estacionar de noche." data-fr="Parking couvert 24h près du stade. Bonne option pour le stationnement de nuit.">24h covered car park near the stadium. Good option for overnight parking.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJyar5yeUyGQ0RWQ7dvl1aGlo" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
     </div>
   </div>
