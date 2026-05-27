@@ -1,104 +1,464 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
-
+ 
 const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
 const APARTMENT_ID = 2957201;
-
-// Guarda o ID da última mensagem vista por reserva
 const lastSeenMessageId = {};
-
+ 
 const APARTMENT_SYSTEM_PROMPT = `
 És um assistente virtual simpático e profissional do apartamento "Alegria 93", situado na Rua da Alegria, 93, 4.º andar, Porto, Portugal.
-
-O teu objetivo é responder às perguntas dos hóspedes de forma clara, cortês e eficiente. Responde sempre no mesmo idioma em que o hóspede te escreve (inglês, português, espanhol ou francês).
-
-=== INFORMAÇÕES DO APARTAMENTO ===
-
-ATENÇÃO IMPORTANTE — ESCADAS:
-O apartamento fica no 4.º andar e NÃO tem elevador. Sempre que o hóspede perguntar sobre acessibilidade, malas pesadas, idosos, bebés, mobilidade reduzida ou elevador, menciona CLARAMENTE que o apartamento fica no 4.º andar sem elevador. Não minimizes esta informação.
-
-CHECK-IN:
-- Horário: das 16:00 às 00:00
-- Self check-in com cofre de chaves
-- As instruções de acesso são enviadas 48 horas antes da chegada
-- NÃO envias códigos de acesso — só informas que serão enviados 48h antes
-
-CHECK-OUT:
-- Até às 11:00
-- Late check-out não é possível garantir (normalmente há hóspedes a entrar a seguir)
-- Os hóspedes podem deixar as malas até às 13:00 no dia de check-out
-
-EARLY CHECK-IN E MALAS:
-- Early check-in antes das 16:00 não é possível garantir
-- Os hóspedes podem deixar as malas a partir das 12:00 no dia de check-in
-
-LUGGIT (serviço de malas):
-- Há desconto de 10% para hóspedes com a LUGGit
-- Link: https://luggit.app/partner/porto-haven
-
-WI-FI:
-- Rede: Vodafone-005A44
-- Password: 7u6HCUX9fk
-
-ESTACIONAMENTO:
-- Garagem privada nas proximidades: Rua da Alegria, 29
-- Preço: 12€ por 24 horas
-
-LIXO:
-- Deve ser deixado à noite
-- Ao sair do prédio, fica do lado direito, em frente ao Café Dragão (esquina junto ao semáforo)
-
-REGRAS DA CASA:
-- Proibido fumar, festas, animais e visitas
-- Capacidade máxima: 6 hóspedes
-
-SUPERMERCADOS:
-- https://goo.gl/maps/A4yTJWfVJgvqqJrX7
-- https://goo.gl/maps/URiy7tfBawLEUmSA7
-
-TRANSPORTES:
-- Metro mais próximo: https://goo.gl/maps/o7DmT396yjWpZ3bk8
-
-RECOMENDAÇÕES TURÍSTICAS:
-- Estação de São Bento, Rua das Flores, Livraria Lello, Palácio da Bolsa, Avenida dos Aliados, Ribeira
-- Ponte D. Luís a pé até Gaia (caves de vinho do Porto)
-- Torre dos Clérigos
-- Foz: Avenida Brasil; Docemar (café com croissants)
-
-RESTAURANTES:
-- Comida portuguesa: O Buraco (Rua do Bolhão 95), A Tasquinha (Rua do Carmo 23)
-- Francesinha: Cervejaria Brasão ou Café Santiago (Rua de Passos Manuel)
-- Modernos: Cantina 32, Traça, LSD, Terra (Foz), Boa Bao (asiático)
-
-=== REGRAS DE ESCALADA ===
-Para os seguintes assuntos, diz que vais passar ao anfitrião:
-- Reembolsos, compensações, descontos, cancelamentos
-- Queixas de limpeza
-- Problemas de acesso, cofre ou chaves
-- Hóspedes extra, visitas, festas, animais, fumar
-- Barulho, vizinhos, polícia, pragas, avarias graves
-- Ameaças de má avaliação
-- Pagamentos fora da plataforma
-
-Nestes casos diz: "I'm passing this to our host who will get back to you shortly."
-
-=== TOM ===
-Cortês, simpático e profissional. Respostas concisas e claras.
-`;
-
+Responde sempre no mesmo idioma em que o hóspede te escreve (inglês, português, espanhol ou francês).
+ 
+ATENÇÃO — ESCADAS: O apartamento fica no 4.º andar SEM elevador. Menciona sempre claramente quando perguntarem sobre acessibilidade, malas pesadas, mobilidade reduzida ou elevador.
+ 
+CHECK-IN: 16:00–00:00. Self check-in com cofre. Instruções enviadas 48h antes. NÃO envias códigos.
+CHECK-OUT: até às 11:00. Late check-out não garantido. Malas até às 13:00.
+EARLY CHECK-IN: não garantido. Malas a partir das 12:00.
+LUGGIT: desconto 10% — https://luggit.app/partner/porto-haven
+WI-FI: Rede Vodafone-005A44 / Password 7u6HCUX9fk
+ESTACIONAMENTO: Rua da Alegria 29 — €12/24h
+LIXO: à noite, lado direito à saída, frente ao Café Dragão (esquina semáforo)
+REGRAS: proibido fumar, festas, animais, visitas externas. Máx 6 hóspedes.
+ 
+ESCALADA para anfitrião: reembolsos, cancelamentos, reclamações, problemas de acesso, chaves, avarias, má avaliação, pagamento fora plataforma.
+Nestes casos: "I'm passing this to our host who will get back to you shortly."
+ 
+Tom: cortês, simpático, profissional.`;
+ 
+const GUIDE_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alegria 93 — Guest Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f5f0;color:#1a1a1a;min-height:100vh}
+.hero{background:#1a1a1a;color:#fff;padding:2rem 1.25rem 1.5rem;position:relative}
+.hero-tag{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:6px}
+.hero-title{font-size:26px;font-weight:600;margin-bottom:4px}
+.hero-sub{font-size:14px;color:#aaa;margin-bottom:1.25rem}
+.lang-toggle{display:flex;gap:8px}
+.lang-btn{padding:6px 16px;border-radius:20px;border:1px solid #444;background:transparent;color:#aaa;font-size:13px;cursor:pointer;transition:all 0.2s}
+.lang-btn.active{background:#fff;color:#1a1a1a;border-color:#fff}
+.hero-map{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;color:#ccc;font-size:13px;text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
+.container{max-width:600px;margin:0 auto;padding:1rem}
+.section{background:#fff;border-radius:12px;margin-bottom:0.75rem;overflow:hidden;border:1px solid #ece9e3}
+.section-header{display:flex;align-items:center;gap:10px;padding:1rem 1.25rem;cursor:pointer;user-select:none}
+.section-icon{width:32px;height:32px;border-radius:8px;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.section-title{font-size:15px;font-weight:600;flex:1;color:#1a1a1a}
+.section-chevron{font-size:18px;color:#999;transition:transform 0.25s}
+.section-body{padding:0 1.25rem 1.25rem;display:none}
+.section-body.open{display:block}
+.section-header.open .section-chevron{transform:rotate(180deg)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0.75rem}
+.info-card{background:#f7f5f0;border-radius:8px;padding:0.75rem}
+.info-card-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+.info-card-value{font-size:15px;font-weight:600;color:#1a1a1a}
+.wifi-box{background:#1a1a1a;color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:0.75rem}
+.wifi-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+.wifi-value{font-size:16px;font-weight:600;font-family:monospace;letter-spacing:0.05em}
+.notice{background:#fff8e6;border:1px solid #f0d080;border-radius:8px;padding:0.75rem 1rem;margin-top:0.75rem;display:flex;gap:8px;align-items:flex-start}
+.notice span{font-size:16px;flex-shrink:0;margin-top:1px}
+.notice p{font-size:13px;color:#7a5c00;line-height:1.5}
+.place{padding:10px 0;border-bottom:1px solid #f0ede8}
+.place:last-child{border-bottom:none}
+.place-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:3px}
+.place-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.place-rating{font-size:12px;color:#f59e0b;font-weight:600;white-space:nowrap}
+.place-desc{font-size:12px;color:#666;line-height:1.4;margin-bottom:5px}
+.place-meta{font-size:11px;color:#999;margin-bottom:5px}
+.map-link{font-size:12px;color:#2563eb;text-decoration:none;display:inline-flex;align-items:center;gap:3px}
+.map-link:hover{text-decoration:underline}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin-left:5px;font-weight:500}
+.badge-cash{background:#fef3c7;color:#92400e}
+.badge-reserve{background:#ede9fe;color:#5b21b6}
+.rule{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f0ede8;font-size:14px}
+.rule:last-child{border-bottom:none}
+.rule-icon{font-size:16px;width:24px;text-align:center}
+.tip{font-size:13px;color:#555;line-height:1.5;padding:8px 0}
+.service-item{padding:10px 0;border-bottom:1px solid #f0ede8}
+.service-item:last-child{border-bottom:none}
+.service-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.service-desc{font-size:12px;color:#666;margin-bottom:5px}
+.divider{height:1px;background:#f0ede8;margin:10px 0}
+.footer{text-align:center;padding:2rem 1rem;color:#999;font-size:12px}
+.emergency-box{background:#fff1f1;border:1px solid #fecaca;border-radius:10px;padding:1rem 1.25rem}
+.emergency-title{font-size:13px;font-weight:600;color:#991b1b;margin-bottom:8px}
+.emergency-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid #fecaca}
+.emergency-row:last-child{border-bottom:none}
+.emergency-label{color:#666}
+.emergency-num{font-weight:600;color:#1a1a1a}
+</style>
+</head>
+<body>
+ 
+<div class="hero">
+  <div class="hero-tag">Porto Haven</div>
+  <div class="hero-title">Alegria 93</div>
+  <div class="hero-sub">Rua da Alegria, 93 · 4º andar · Porto</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('pt')">Português</button>
+  </div>
+  <a href="https://maps.app.goo.gl/XvB8rcyHfxnWQKBa8" target="_blank" class="hero-map">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+</div>
+ 
+<div class="container">
+ 
+  <!-- CHECK-IN -->
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-icon">🔑</div>
+      <div class="section-title" data-en="Check-in & check-out" data-pt="Check-in & check-out">Check-in & check-out</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body open">
+      <div class="info-grid">
+        <div class="info-card"><div class="info-card-label" data-en="Check-in" data-pt="Check-in">Check-in</div><div class="info-card-value">16:00 – 00:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Check-out" data-pt="Check-out">Check-out</div><div class="info-card-value" data-en="by 11:00" data-pt="até às 11:00">by 11:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Drop bags (arrival)" data-pt="Deixar malas (chegada)">Drop bags (arrival)</div><div class="info-card-value" data-en="from 12:00" data-pt="a partir das 12:00">from 12:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Drop bags (departure)" data-pt="Deixar malas (saída)">Drop bags (departure)</div><div class="info-card-value" data-en="until 13:00" data-pt="até às 13:00">until 13:00</div></div>
+      </div>
+      <p class="tip" data-en="Self check-in with key box. Your access code is sent 48 hours before arrival. Insert the code and pull. Inside you'll find 2 keys: one for the building door and one for the apartment on the 4th floor." data-pt="Self check-in com cofre. O código de acesso é enviado 48h antes. Insere o código e puxa. Encontras 2 chaves: uma para a porta do prédio e outra para o apartamento no 4º andar.">Self check-in with key box. Your access code is sent 48 hours before arrival. Insert the code and pull. Inside you'll find 2 keys: one for the building door and one for the apartment on the 4th floor.</p>
+      <div class="notice"><span>⚠️</span><p data-en="The apartment is on the 4th floor with no lift. There are stairs to climb with your luggage." data-pt="O apartamento fica no 4.º andar sem elevador. Terás de subir escadas com a bagagem.">The apartment is on the 4th floor with no lift. There are stairs to climb with your luggage.</p></div>
+    </div>
+  </div>
+ 
+  <!-- WI-FI -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">📶</div>
+      <div class="section-title">Wi-Fi</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="wifi-box">
+        <div class="wifi-label" data-en="Network" data-pt="Rede">Network</div>
+        <div class="wifi-value">Vodafone-005A44</div>
+      </div>
+      <div class="wifi-box" style="margin-top:8px">
+        <div class="wifi-label">Password</div>
+        <div class="wifi-value">7u6HCUX9fk</div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- RESTAURANTS -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🍽️</div>
+      <div class="section-title" data-en="Restaurants & cafés" data-pt="Restaurantes & cafés">Restaurants & cafés</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-header"><div class="place-name">Maria Rita <span class="badge badge-cash" data-en="cash only" data-pt="só dinheiro">cash only</span><span class="badge badge-reserve" data-en="book ahead" data-pt="reserva obrigatória">book ahead</span></div><div class="place-rating">⭐ local fav</div></div>
+        <div class="place-desc" data-en="Legendary octopus, generous portions and genuine warmth. A neighbourhood gem." data-pt="Polvo lendário, doses generosas e acolhimento genuíno. Uma pérola do bairro.">Legendary octopus, generous portions and genuine warmth. A neighbourhood gem.</div>
+        <div class="place-meta" data-en="Mon–Sun 12:00–15:00 & 19:30–00:00" data-pt="Seg–Dom 12h–15h e 19h30–00h">Mon–Sun 12:00–15:00 & 19:30–00:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJoxs8c-9kJA0R9K7AdZ3yyrw" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Francesinha Café <span class="badge badge-reserve" data-en="book ahead" data-pt="reserva">book ahead</span></div><div class="place-rating">⭐ top francesinha</div></div>
+        <div class="place-desc" data-en="One of Porto's best francesinhas, right on your street. Small and always busy." data-pt="Uma das melhores francesinhas do Porto, mesmo na tua rua. Pequeno e sempre cheio.">One of Porto's best francesinhas, right on your street. Small and always busy.</div>
+        <div class="place-meta" data-en="Tue–Sat 12:30–15:00 & 19:00–22:00" data-pt="Ter–Sáb 12h30–15h e 19h–22h">Tue–Sat 12:30–15:00 & 19:00–22:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJtZ4woVhkJA0R1YIaQGr591Y" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Estrela do Lima</div><div class="place-rating">⭐ neighbourhood gem</div></div>
+        <div class="place-desc" data-en="Family restaurant, incredibly welcoming and consistently excellent." data-pt="Restaurante de família, acolhedor e consistentemente excelente.">Family restaurant, incredibly welcoming and consistently excellent.</div>
+        <div class="place-meta" data-en="Mon–Sat 12:00–15:00 & 19:00–22:00" data-pt="Seg–Sáb 12h–15h e 19h–22h">Mon–Sat 12:00–15:00 & 19:00–22:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJY0yxo1hkJA0Rzh1qc1HiG-E" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Solar da Alegria</div><div class="place-rating">⭐ traditional</div></div>
+        <div class="place-desc" data-en="Steaks and fresh fish in a cosy traditional setting, right on your street." data-pt="Bifes e peixe fresco num ambiente tradicional, mesmo na tua rua.">Steaks and fresh fish in a cosy traditional setting, right on your street.</div>
+        <div class="place-meta" data-en="Mon–Sat 12:00–15:00 & 18:30–22:00" data-pt="Seg–Sáb 12h–15h e 18h30–22h">Mon–Sat 12:00–15:00 & 18:30–22:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJp2jXV_ZkJA0RJRCdIFc8ea8" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Portucale</div><div class="place-rating">⭐ panoramic views</div></div>
+        <div class="place-desc" data-en="Stunning panoramic views from the 13th floor. A classic Porto dining experience." data-pt="Vistas panorâmicas deslumbrantes do 13.º andar. Uma experiência gastronómica clássica.">Stunning panoramic views from the 13th floor. A classic Porto dining experience.</div>
+        <div class="place-meta" data-en="Daily 12:30–15:00 & 19:30–23:00" data-pt="Diário 12h30–15h e 19h30–23h">Daily 12:30–15:00 & 19:30–23:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJrW4kIPdkJA0RtoVTs5RG6QU" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Cafés & brunch" data-pt="Cafés & brunch">Cafés & brunch</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Breakfast Lovers Bolhão</div><div class="place-rating">⭐ next door</div></div>
+        <div class="place-desc" data-en="Right next door at nº 87! Exceptional brunch and impeccable presentation." data-pt="Mesmo ao lado, no nº87! Brunch excecional e apresentação impecável.">Right next door at nº 87! Exceptional brunch and impeccable presentation.</div>
+        <div class="place-meta" data-en="Daily 8:00–16:00" data-pt="Diário 8h–16h">Daily 8:00–16:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ3XkGDKFlJA0Rj904CCpHG-o" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Café D. Fernando</div><div class="place-rating">⭐ local classic</div></div>
+        <div class="place-desc" data-en="Old-fashioned Portuguese café with honest food and one of the friendliest owners you'll meet." data-pt="Café português à antiga, comida honesta e um dos donos mais simpáticos que vais encontrar.">Old-fashioned Portuguese café with honest food and one of the friendliest owners you'll meet.</div>
+        <div class="place-meta" data-en="Mon–Fri 8:00–18:00" data-pt="Seg–Sex 8h–18h">Mon–Fri 8:00–18:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJJ_vMcfBkJA0ROajNsAC7q5I" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Rooftop bars" data-pt="Rooftop bars">Rooftop bars</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Terraço do Jardim</div><div class="place-rating">⭐ 4.4 · 128 reviews</div></div>
+        <div class="place-desc" data-en="Rooftop lounge with stunning city views, great cocktails and friendly staff. A hidden gem." data-pt="Rooftop com vistas deslumbrantes da cidade, cocktails e equipa simpática. Uma joia escondida.">Rooftop lounge with stunning city views, great cocktails and friendly staff. A hidden gem.</div>
+        <div class="place-meta" data-en="Daily 11:00–00:00" data-pt="Diário 11h–00h">Daily 11:00–00:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJh1ZsQQBlJA0RNY_5IS7Ix58" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Amura Bar & Rooftop</div><div class="place-rating">⭐ 4.5 · river views</div></div>
+        <div class="place-desc" data-en="Beautiful rooftop overlooking the Douro river. Great atmosphere, friendly service." data-pt="Rooftop com vistas para o Douro. Excelente ambiente e serviço simpático.">Beautiful rooftop overlooking the Douro river. Great atmosphere, friendly service.</div>
+        <div class="place-meta" data-en="Daily 11:00–23:30" data-pt="Diário 11h–23h30">Daily 11:00–23:30</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ31kEd4FlJA0R6My2TrmhC6o" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- SUPERMARKETS -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🛒</div>
+      <div class="section-title" data-en="Supermarkets" data-pt="Supermercados">Supermarkets</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name">Ali Supermarket</div>
+        <div class="place-desc" data-en="Right on your street at nº 139. Open until 4am every day — perfect for late arrivals." data-pt="Mesmo na tua rua, no nº139. Aberto até às 4h da manhã todos os dias.">Right on your street at nº 139. Open until 4am every day — perfect for late arrivals.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJwWHrbdllJA0RvcrYoNNTTDw" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-name">Alaina Supermarket</div>
+        <div class="place-desc" data-en="Rua da Alegria 278. Good selection, open until late. Daily 11:30–02:00." data-pt="Rua da Alegria 278. Boa seleção, aberto até tarde. Diário 11h30–2h.">Rua da Alegria 278. Good selection, open until late. Daily 11:30–02:00.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ7RiMh8RlJA0RXB2lGK_yfaw" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- TRANSPORT -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🚇</div>
+      <div class="section-title" data-en="Getting around" data-pt="Transportes">Getting around</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="service-item">
+        <div class="service-name" data-en="Metro — Bolhão (Yellow Line)" data-pt="Metro — Bolhão (Linha Amarela)">Metro — Bolhão (Yellow Line)</div>
+        <div class="service-desc" data-en="~5 min walk. Connects to the airport, city centre and all main hubs." data-pt="~5 min a pé. Liga ao aeroporto, centro e todos os principais nós da cidade.">~5 min walk. Connects to the airport, city centre and all main hubs.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJXUpOsvpkJA0RUdn_HxFcuu0" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name" data-en="Bus stop — Bolhão" data-pt="Paragem de autocarro — Bolhão">Bus stop — Bolhão</div>
+        <div class="service-desc" data-en="Multiple bus lines nearby. Main stop at Rua de Fernandes Tomás / Bolhão." data-pt="Várias linhas de autocarro perto. Paragem principal na Rua de Fernandes Tomás / Bolhão.">Multiple bus lines nearby. Main stop at Rua de Fernandes Tomás / Bolhão.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJezow-_pkJA0RizuzbjfTz4M" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name" data-en="Taxi rank — Trindade" data-pt="Praça de Taxis — Trindade">Taxi rank — Trindade</div>
+        <div class="service-desc" data-en="Open 24h. Rua da Trindade, ~5 min walk. Also available: Uber, Bolt, Free Now." data-pt="Aberto 24h. Rua da Trindade, ~5 min a pé. Também disponível: Uber, Bolt, Free Now.">Open 24h. Rua da Trindade, ~5 min walk. Also available: Uber, Bolt, Free Now.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJdQVvcftkJA0RaHWksbiwQSI" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name" data-en="Airport transfer" data-pt="Transfer aeroporto">Airport transfer</div>
+        <div class="service-desc" data-en="Book a direct ride to/from the apartment." data-pt="Reserva uma viagem direta de/para o apartamento.">Book a direct ride to/from the apartment.</div>
+        <a href="https://bnb.welcomepickups.com/property_groups/311/properties/4635" target="_blank" class="map-link">🚗 <span data-en="Book transfer" data-pt="Reservar transfer">Book transfer</span></a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- PARKING -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🅿️</div>
+      <div class="section-title" data-en="Parking" data-pt="Estacionamento">Parking</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name" data-en="Private garage — Rua da Alegria 29" data-pt="Garagem privada — Rua da Alegria 29">Private garage — Rua da Alegria 29</div>
+        <div class="place-desc" data-en="Steps from the apartment. €12/24h. Very convenient." data-pt="A poucos passos do apartamento. €12/24h. Muito conveniente.">Steps from the apartment. €12/24h. Very convenient.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Parque Central — Rua da Alegria 35" data-pt="Parque Central — Rua da Alegria 35">Parque Central — Rua da Alegria 35</div>
+        <div class="place-desc" data-en="€1.40/h · max €12/day · Open 24h self-service · Don't leave valuables in the car." data-pt="€1,40/h · máx €12/dia · Aberto 24h self-service · Não deixes objetos de valor no carro.">€1.40/h · max €12/day · Open 24h self-service · Don't leave valuables in the car.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJx_IeIABlJA0RuSpXIa9DFR0" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- USEFUL SERVICES -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🏪</div>
+      <div class="section-title" data-en="Useful services nearby" data-pt="Serviços úteis perto">Useful services nearby</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Pharmacy" data-pt="Farmácia">Pharmacy</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Farmácia Garantia</div><div class="place-rating">⭐ 4.6</div></div>
+        <div class="place-desc" data-en="Friendly and professional staff, great prices. Highly recommended." data-pt="Equipa simpática e profissional, bons preços. Muito recomendada.">Friendly and professional staff, great prices. Highly recommended.</div>
+        <div class="place-meta" data-en="Mon–Fri 8:30–19:30 · Sat 9:00–19:00" data-pt="Seg–Sex 8h30–19h30 · Sáb 9h–19h">Mon–Fri 8:30–19:30 · Sat 9:00–19:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJazRAz_pkJA0RgEqEF1fSzJE" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Hair salon" data-pt="Cabeleireiro">Hair salon</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Gomes CorteseCores</div><div class="place-rating">⭐ 4.9 · 1080 reviews</div></div>
+        <div class="place-desc" data-en="Outstanding salon right on your street. Speaks English, takes WhatsApp bookings. Consistently excellent reviews." data-pt="Salão excelente mesmo na tua rua. Fala inglês, marcações via WhatsApp. Reviews consistentemente excelentes.">Outstanding salon right on your street. Speaks English, takes WhatsApp bookings. Consistently excellent reviews.</div>
+        <div class="place-meta" data-en="Mon–Fri 9:30–20:00 · Sat 9:30–19:00" data-pt="Seg–Sex 9h30–20h · Sáb 9h30–19h">Mon–Fri 9:30–20:00 · Sat 9:30–19:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJTxgfNvBkJA0RbgitoHmwvpc" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Laundry" data-pt="Lavandaria">Laundry</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Lavandaria Marlinwash</div><div class="place-rating">⭐ 4.5 · 218 reviews</div></div>
+        <div class="place-desc" data-en="Self-service laundry on your street at nº 166. Detergent included. English instructions. Open daily 8:00–21:30." data-pt="Lavandaria self-service na tua rua, no nº 166. Detergente incluído. Instruções em inglês. Aberta todos os dias 8h–21h30.">Self-service laundry on your street at nº 166. Detergent included. English instructions. Open daily 8:00–21:30.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJRwFy5u9kJA0RHOntiM57qTs" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="ATM / Cash" data-pt="Multibanco">ATM / Cash</p>
+      <div class="place">
+        <div class="place-name" data-en="Multibanco — Rua da Alegria 3" data-pt="Multibanco — Rua da Alegria 3">Multibanco — Rua da Alegria 3</div>
+        <div class="place-desc" data-en="Closest ATM, just steps away at the bottom of your street. Use Multibanco machines — avoid Euronet (high fees)." data-pt="O multibanco mais próximo, mesmo no início da tua rua. Usa máquinas Multibanco — evita Euronet (taxas altas).">Closest ATM, just steps away at the bottom of your street. Use Multibanco machines — avoid Euronet (high fees).</div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- LUGGAGE -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🧳</div>
+      <div class="section-title" data-en="Luggage storage" data-pt="Guarda-bagagem">Luggage storage</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="service-item">
+        <div class="service-name">Bounce</div>
+        <div class="service-desc" data-en="Storage locations nearby from €1/day. 5% discount with our link." data-pt="Locais de armazenamento perto, a partir de €1/dia. 5% de desconto com o nosso link.">Storage locations nearby from €1/day. 5% discount with our link.</div>
+        <a href="https://go.bounce.com/PORTOHAVEN7471817336" target="_blank" class="map-link">🔗 <span data-en="Book with discount" data-pt="Reservar com desconto">Book with discount</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name">LUGGit</div>
+        <div class="service-desc" data-en="Collects and delivers your bags wherever and whenever you want. 10% discount for our guests." data-pt="Recolhe e entrega a tua bagagem onde e quando quiseres. 10% de desconto para os nossos hóspedes.">Collects and delivers your bags wherever and whenever you want. 10% discount for our guests.</div>
+        <a href="https://luggit.app/partner/porto-haven" target="_blank" class="map-link">🔗 <span data-en="Book with discount" data-pt="Reservar com desconto">Book with discount</span></a>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- SIGHTSEEING -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🗺️</div>
+      <div class="section-title" data-en="Things to do" data-pt="O que visitar">Things to do</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name" data-en="São Bento Station" data-pt="Estação de São Bento">São Bento Station</div>
+        <div class="place-desc" data-en="Stunning azulejo tile panels depicting Portuguese history. Free to enter." data-pt="Painéis de azulejos impressionantes com cenas da história portuguesa. Entrada gratuita.">Stunning azulejo tile panels depicting Portuguese history. Free to enter.</div>
+      </div>
+      <div class="place">
+        <div class="place-name">Livraria Lello</div>
+        <div class="place-desc" data-en="One of the most beautiful bookshops in the world. Book tickets online to avoid queues." data-pt="Uma das livrarias mais bonitas do mundo. Compra bilhetes online para evitar filas.">One of the most beautiful bookshops in the world. Book tickets online to avoid queues.</div>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Palácio da Bolsa</div><div class="place-rating">⭐ 4.5 · 13k reviews</div></div>
+        <div class="place-desc" data-en="Magnificent 19th century palace. The Arab Room is breathtaking. Guided tours only (~30 min)." data-pt="Palácio magnífico do séc. XIX. A Sala Árabe é de cortar a respiração. Só visitas guiadas (~30 min).">Magnificent 19th century palace. The Arab Room is breathtaking. Guided tours only (~30 min).</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJQQ2CwuFkJA0RUdkM5HFBMmk" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Ribeira & D. Luís Bridge" data-pt="Ribeira & Ponte D. Luís">Ribeira & D. Luís Bridge</div>
+        <div class="place-desc" data-en="Walk along the riverside, cross the bridge on foot to Gaia for the Port wine cellars and stunning views." data-pt="Passeio junto ao rio, atravessa a ponte a pé até Gaia para as caves de vinho do Porto e vistas deslumbrantes.">Walk along the riverside, cross the bridge on foot to Gaia for the Port wine cellars and stunning views.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Torre dos Clérigos" data-pt="Torre dos Clérigos">Torre dos Clérigos</div>
+        <div class="place-desc" data-en="Iconic baroque tower with a 360° panoramic view of Porto. Well worth the climb." data-pt="Torre barroca icónica com vista panorâmica 360° do Porto. Vale bem a subida.">Iconic baroque tower with a 360° panoramic view of Porto. Well worth the climb.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Foz do Douro" data-pt="Foz do Douro">Foz do Douro</div>
+        <div class="place-desc" data-en="Where the Douro meets the Atlantic. Walk along Avenida Brasil. Stop at Docemar for exceptional croissants." data-pt="Onde o Douro encontra o Atlântico. Passeio pela Avenida Brasil. Para no Docemar para provar os croissants.">Where the Douro meets the Atlantic. Walk along Avenida Brasil. Stop at Docemar for exceptional croissants.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Rua das Flores & Avenida dos Aliados" data-pt="Rua das Flores & Avenida dos Aliados">Rua das Flores & Avenida dos Aliados</div>
+        <div class="place-desc" data-en="Beautiful pedestrian street and the grand boulevard at the heart of Porto." data-pt="Bela rua pedonal e a grande avenida no coração do Porto.">Beautiful pedestrian street and the grand boulevard at the heart of Porto.</div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- HOUSE RULES -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">📋</div>
+      <div class="section-title" data-en="House rules" data-pt="Regras da casa">House rules</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="rule"><div class="rule-icon">🚭</div><span data-en="No smoking" data-pt="Proibido fumar">No smoking</span></div>
+      <div class="rule"><div class="rule-icon">🎉</div><span data-en="No parties or events" data-pt="Sem festas ou eventos">No parties or events</span></div>
+      <div class="rule"><div class="rule-icon">🐾</div><span data-en="No pets" data-pt="Sem animais">No pets</span></div>
+      <div class="rule"><div class="rule-icon">🚫</div><span data-en="No external visitors" data-pt="Sem visitas externas">No external visitors</span></div>
+      <div class="rule"><div class="rule-icon">👥</div><span data-en="Maximum 6 guests" data-pt="Máximo 6 hóspedes">Maximum 6 guests</span></div>
+      <div class="divider"></div>
+      <p class="tip" data-en="🗑️ Bins: take rubbish out in the evening. When you leave the building, the bins are on the right, in front of Café Dragão on the corner by the traffic lights." data-pt="🗑️ Lixo: coloca o lixo à noite. Ao sair do prédio, os caixotes ficam do lado direito, em frente ao Café Dragão, na esquina junto ao semáforo.">🗑️ Bins: take rubbish out in the evening. When you leave the building, the bins are on the right, in front of Café Dragão on the corner by the traffic lights.</p>
+    </div>
+  </div>
+ 
+  <!-- EMERGENCY -->
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🆘</div>
+      <div class="section-title" data-en="Emergency contacts" data-pt="Contactos de emergência">Emergency contacts</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="emergency-box">
+        <div class="emergency-title" data-en="Emergency numbers" data-pt="Números de emergência">Emergency numbers</div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Emergency (EU)" data-pt="Emergência (EU)">Emergency (EU)</span><span class="emergency-num">112</span></div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Police (PSP)" data-pt="Polícia (PSP)">Police (PSP)</span><span class="emergency-num">222 092 000</span></div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Hospital St António" data-pt="Hospital St António">Hospital St António</span><span class="emergency-num">222 077 500</span></div>
+      </div>
+      <p class="tip" style="margin-top:0.75rem" data-en="For any issue with the apartment, please message us directly through your booking platform and we'll get back to you as soon as possible." data-pt="Para qualquer problema com o apartamento, envia-nos uma mensagem pela plataforma de reserva e responderemos o mais brevemente possível.">For any issue with the apartment, please message us directly through your booking platform and we'll get back to you as soon as possible.</p>
+    </div>
+  </div>
+ 
+</div>
+ 
+<div class="footer">
+  <p data-en="Porto Haven · Alegria 93 · We hope you have a wonderful stay!" data-pt="Porto Haven · Alegria 93 · Esperamos que tenhas uma estadia maravilhosa!">Porto Haven · Alegria 93 · We hope you have a wonderful stay!</p>
+</div>
+ 
+<script>
+function toggle(header){
+  const body=header.nextElementSibling;
+  const open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  header.classList.toggle('open',!open);
+}
+function setLang(lang){
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent=el.getAttribute('data-'+lang)||el.getAttribute('data-en');
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.classList.toggle('active',btn.textContent.toLowerCase()===lang||(lang==='pt'&&btn.textContent==='Português')||(lang==='en'&&btn.textContent==='English'));
+  });
+}
+</script>
+</body>
+</html>`;
+ 
 async function getActiveBookings() {
-  const past30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const today = new Date().toISOString().split('T')[0];
   const future90 = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   const response = await fetch(
-    `https://login.smoobu.com/api/reservations?apartmentId=${APARTMENT_ID}&arrivalFrom=${past30}&arrivalTo=${future90}&pageSize=50`,
+    `https://login.smoobu.com/api/reservations?apartmentId=${APARTMENT_ID}&departureFrom=${today}&arrivalTo=${future90}&pageSize=50`,
     { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
   );
   return response.json();
 }
-
+ 
 async function getReservationMessages(reservationId) {
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages`,
@@ -106,7 +466,7 @@ async function getReservationMessages(reservationId) {
   );
   return response.json();
 }
-
+ 
 async function sendMessageToGuest(reservationId, messageBody) {
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-guest`,
@@ -118,9 +478,9 @@ async function sendMessageToGuest(reservationId, messageBody) {
   );
   return response.json();
 }
-
+ 
 async function sendAlertToHost(reservationId, guestMessage) {
-  const alertBody = `⚠️ ALERTA IA: Mensagem do hóspede requer a tua atenção:\n\n"${guestMessage}"\n\n— Assistente Alegria 93`;
+  const alertBody = `⚠️ ALERTA IA: Mensagem requer a tua atenção:\n\n"${guestMessage}"\n\n— Assistente Alegria 93`;
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-host`,
     {
@@ -131,7 +491,7 @@ async function sendAlertToHost(reservationId, guestMessage) {
   );
   return response.json();
 }
-
+ 
 async function generateAIResponse(guestMessage, conversationHistory = []) {
   const messages = [...conversationHistory, { role: 'user', content: guestMessage }];
   const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -151,63 +511,44 @@ async function generateAIResponse(guestMessage, conversationHistory = []) {
   const data = await response.json();
   return data.content?.[0]?.text || null;
 }
-
+ 
 function needsEscalation(aiResponse) {
-  const phrases = ["passing this to our host", "vou passar ao anfitrião", "paso esto al anfitrión", "je transmets"];
+  const phrases = ["passing this to our host","vou passar ao anfitrião","paso esto al anfitrión","je transmets"];
   return phrases.some(p => aiResponse.toLowerCase().includes(p.toLowerCase()));
 }
-
+ 
 async function checkNewMessages() {
   console.log('🔍 A verificar mensagens novas...');
   try {
     const data = await getActiveBookings();
     const bookings = data.bookings || [];
     console.log(`📋 ${bookings.length} reservas encontradas`);
-
     for (const booking of bookings) {
       try {
         const messagesData = await getReservationMessages(booking.id);
         const messages = messagesData.messages || [];
         if (!messages.length) continue;
-
         const maxId = Math.max(...messages.map(m => m.id));
-
-        // Primeira vez que vemos esta reserva — guarda o ID máximo atual e não responde
         if (lastSeenMessageId[booking.id] === undefined) {
           lastSeenMessageId[booking.id] = maxId;
           console.log(`⏭️ Reserva ${booking.id}: inicializada (última msg ID: ${maxId})`);
           continue;
         }
-
-        // Procura mensagens novas de hóspedes (id > lastSeen, type=1)
-        const newGuestMessages = messages.filter(
-          m => m.id > lastSeenMessageId[booking.id] && m.type === 1
-        );
-
+        const newGuestMessages = messages.filter(m => m.id > lastSeenMessageId[booking.id] && m.type === 1);
         if (!newGuestMessages.length) continue;
-
-        // Responde à última mensagem nova do hóspede
         const lastNew = newGuestMessages[newGuestMessages.length - 1];
-        console.log(`💬 Nova mensagem na reserva ${booking.id} (ID ${lastNew.id}): ${lastNew.message}`);
-
-        // Histórico para contexto
-        const history = messages
-          .filter(m => m.id < lastNew.id)
-          .map(m => ({ role: m.type === 1 ? 'user' : 'assistant', content: m.message }));
-
+        console.log(`💬 Nova mensagem na reserva ${booking.id}: ${lastNew.message}`);
+        const history = messages.filter(m => m.id < lastNew.id).map(m => ({ role: m.type === 1 ? 'user' : 'assistant', content: m.message }));
         const aiResponse = await generateAIResponse(lastNew.message, history);
         if (!aiResponse) continue;
-
         console.log(`🤖 Resposta IA: ${aiResponse}`);
         await sendMessageToGuest(booking.id, aiResponse);
         lastSeenMessageId[booking.id] = maxId;
         console.log(`✅ Resposta enviada (reserva ${booking.id})`);
-
         if (needsEscalation(aiResponse)) {
           await sendAlertToHost(booking.id, lastNew.message);
           console.log(`🚨 Anfitrião alertado`);
         }
-
       } catch (e) {
         console.warn(`Erro na reserva ${booking.id}:`, e.message);
       }
@@ -216,19 +557,27 @@ async function checkNewMessages() {
     console.error('Erro no polling:', e.message);
   }
 }
-
+ 
 setInterval(checkNewMessages, 60 * 1000);
 setTimeout(checkNewMessages, 3000);
-
+ 
 app.post('/webhook', (req, res) => res.json({ status: 'received' }));
-
+ 
+app.get('/guia', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(GUIDE_HTML);
+});
+ 
 app.get('/', (req, res) => res.json({
   status: 'online',
   service: 'Alegria 93 — AI Guest Assistant',
+  guide: '/guia',
   timestamp: new Date().toISOString(),
 }));
-
+ 
 app.listen(PORT, () => {
   console.log(`🏠 Assistente Alegria 93 a correr na porta ${PORT}`);
+  console.log(`📖 Guia disponível em /guia`);
   console.log(`🔄 Polling ativo — só Alegria 93 (ID: ${APARTMENT_ID})`);
 });
+ 
