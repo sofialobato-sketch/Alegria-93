@@ -568,7 +568,7 @@ const GUIDE_CEDOFEITA_HTML = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cedofeita 101 — Guest Guide</title>
+<title>Porto Haven — Cedofeita · Guest Guide</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f5f0;color:#1a1a1a;min-height:100vh}
@@ -628,8 +628,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="hero">
   <div class="hero-tag">Porto Haven</div>
-  <div class="hero-title">Cedofeita 101</div>
-  <div class="hero-sub">Rua de Cedofeita, 213 · 1º A · Porto</div>
+  <div class="hero-title">Porto Haven — Cedofeita</div>
+  <div class="hero-sub">Rua de Cedofeita, 213 · Porto</div>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">English</button>
     <button class="lang-btn" onclick="setLang('pt')">Português</button>
@@ -923,7 +923,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="rule"><div class="rule-icon">🎉</div><span data-en="No parties or events" data-pt="Sem festas ou eventos">No parties or events</span></div>
       <div class="rule"><div class="rule-icon">🐾</div><span data-en="No pets" data-pt="Sem animais">No pets</span></div>
       <div class="rule"><div class="rule-icon">🚫</div><span data-en="No external visitors" data-pt="Sem visitas externas">No external visitors</span></div>
-      <div class="rule"><div class="rule-icon">👥</div><span data-en="Maximum 4 guests" data-pt="Máximo 4 hóspedes">Maximum 4 guests</span></div>
     </div>
   </div>
 
@@ -947,7 +946,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <div class="footer">
-  <p data-en="Porto Haven · Cedofeita 101 · We hope you have a wonderful stay!" data-pt="Porto Haven · Cedofeita 101 · Esperamos que tenhas uma estadia maravilhosa!">Porto Haven · Cedofeita 101 · We hope you have a wonderful stay!</p>
+  <p data-en="Porto Haven · Cedofeita · We hope you have a wonderful stay!" data-pt="Porto Haven · Cedofeita · Esperamos que tenhas uma estadia maravilhosa!">Porto Haven · Cedofeita 101 · We hope you have a wonderful stay!</p>
 </div>
 
 <script>
