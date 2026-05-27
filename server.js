@@ -1,19 +1,19 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
- 
+
 const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
 const APARTMENT_ID = 2957201;
 const lastSeenMessageId = {};
- 
+
 const APARTMENT_SYSTEM_PROMPT = `
 És um assistente virtual simpático e profissional do apartamento "Alegria 93", situado na Rua da Alegria, 93, 4.º andar, Porto, Portugal.
 Responde sempre no mesmo idioma em que o hóspede te escreve (inglês, português, espanhol ou francês).
- 
+
 ATENÇÃO — ESCADAS: O apartamento fica no 4.º andar SEM elevador. Menciona sempre claramente quando perguntarem sobre acessibilidade, malas pesadas, mobilidade reduzida ou elevador.
- 
+
 CHECK-IN: 16:00–00:00. Self check-in com cofre. Instruções enviadas 48h antes. NÃO envias códigos.
 CHECK-OUT: até às 11:00. Late check-out não garantido. Malas até às 13:00.
 EARLY CHECK-IN: não garantido. Malas a partir das 12:00.
@@ -22,12 +22,12 @@ WI-FI: Rede Vodafone-005A44 / Password 7u6HCUX9fk
 ESTACIONAMENTO: Rua da Alegria 29 — €12/24h
 LIXO: à noite, lado direito à saída, frente ao Café Dragão (esquina semáforo)
 REGRAS: proibido fumar, festas, animais, visitas externas. Máx 6 hóspedes.
- 
+
 ESCALADA para anfitrião: reembolsos, cancelamentos, reclamações, problemas de acesso, chaves, avarias, má avaliação, pagamento fora plataforma.
 Nestes casos: "I'm passing this to our host who will get back to you shortly."
- 
+
 Tom: cortês, simpático, profissional.`;
- 
+
 const GUIDE_HTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +95,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </style>
 </head>
 <body>
- 
+
 <div class="hero">
   <div class="hero-tag">Porto Haven</div>
   <div class="hero-title">Alegria 93</div>
@@ -106,9 +106,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <a href="https://maps.app.goo.gl/XvB8rcyHfxnWQKBa8" target="_blank" class="hero-map">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
 </div>
- 
+
 <div class="container">
- 
+
   <!-- CHECK-IN -->
   <div class="section">
     <div class="section-header open" onclick="toggle(this)">
@@ -127,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="notice"><span>⚠️</span><p data-en="The apartment is on the 4th floor with no lift. There are stairs to climb with your luggage." data-pt="O apartamento fica no 4.º andar sem elevador. Terás de subir escadas com a bagagem.">The apartment is on the 4th floor with no lift. There are stairs to climb with your luggage.</p></div>
     </div>
   </div>
- 
+
   <!-- WI-FI -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -146,7 +146,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- RESTAURANTS -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -215,7 +215,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- SUPERMARKETS -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -236,7 +236,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- TRANSPORT -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -267,7 +267,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- PARKING -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -287,7 +287,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- USEFUL SERVICES -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -326,7 +326,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- LUGGAGE -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -347,7 +347,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- SIGHTSEEING -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -387,7 +387,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
   </div>
- 
+
   <!-- HOUSE RULES -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -405,7 +405,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <p class="tip" data-en="🗑️ Bins: take rubbish out in the evening. When you leave the building, the bins are on the right, in front of Café Dragão on the corner by the traffic lights." data-pt="🗑️ Lixo: coloca o lixo à noite. Ao sair do prédio, os caixotes ficam do lado direito, em frente ao Café Dragão, na esquina junto ao semáforo.">🗑️ Bins: take rubbish out in the evening. When you leave the building, the bins are on the right, in front of Café Dragão on the corner by the traffic lights.</p>
     </div>
   </div>
- 
+
   <!-- EMERGENCY -->
   <div class="section">
     <div class="section-header" onclick="toggle(this)">
@@ -423,13 +423,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <p class="tip" style="margin-top:0.75rem" data-en="For any issue with the apartment, please message us directly through your booking platform and we'll get back to you as soon as possible." data-pt="Para qualquer problema com o apartamento, envia-nos uma mensagem pela plataforma de reserva e responderemos o mais brevemente possível.">For any issue with the apartment, please message us directly through your booking platform and we'll get back to you as soon as possible.</p>
     </div>
   </div>
- 
+
 </div>
- 
+
 <div class="footer">
   <p data-en="Porto Haven · Alegria 93 · We hope you have a wonderful stay!" data-pt="Porto Haven · Alegria 93 · Esperamos que tenhas uma estadia maravilhosa!">Porto Haven · Alegria 93 · We hope you have a wonderful stay!</p>
 </div>
- 
+
 <script>
 function toggle(header){
   const body=header.nextElementSibling;
@@ -448,7 +448,7 @@ function setLang(lang){
 </script>
 </body>
 </html>`;
- 
+
 async function getActiveBookings() {
   const today = new Date().toISOString().split('T')[0];
   const future90 = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
@@ -458,7 +458,7 @@ async function getActiveBookings() {
   );
   return response.json();
 }
- 
+
 async function getReservationMessages(reservationId) {
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages`,
@@ -466,7 +466,7 @@ async function getReservationMessages(reservationId) {
   );
   return response.json();
 }
- 
+
 async function sendMessageToGuest(reservationId, messageBody) {
   const response = await fetch(
     `https://login.smoobu.com/api/reservations/${reservationId}/messages/send-message-to-guest`,
@@ -478,7 +478,7 @@ async function sendMessageToGuest(reservationId, messageBody) {
   );
   return response.json();
 }
- 
+
 async function sendAlertToHost(reservationId, guestMessage) {
   const alertBody = `⚠️ ALERTA IA: Mensagem requer a tua atenção:\n\n"${guestMessage}"\n\n— Assistente Alegria 93`;
   const response = await fetch(
@@ -491,7 +491,7 @@ async function sendAlertToHost(reservationId, guestMessage) {
   );
   return response.json();
 }
- 
+
 async function generateAIResponse(guestMessage, conversationHistory = []) {
   const messages = [...conversationHistory, { role: 'user', content: guestMessage }];
   const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -511,12 +511,12 @@ async function generateAIResponse(guestMessage, conversationHistory = []) {
   const data = await response.json();
   return data.content?.[0]?.text || null;
 }
- 
+
 function needsEscalation(aiResponse) {
   const phrases = ["passing this to our host","vou passar ao anfitrião","paso esto al anfitrión","je transmets"];
   return phrases.some(p => aiResponse.toLowerCase().includes(p.toLowerCase()));
 }
- 
+
 async function checkNewMessages() {
   console.log('🔍 A verificar mensagens novas...');
   try {
@@ -557,27 +557,438 @@ async function checkNewMessages() {
     console.error('Erro no polling:', e.message);
   }
 }
- 
+
 setInterval(checkNewMessages, 60 * 1000);
 setTimeout(checkNewMessages, 3000);
- 
+
 app.post('/webhook', (req, res) => res.json({ status: 'received' }));
- 
+
+const GUIDE_CEDOFEITA_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedofeita 101 — Guest Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f5f0;color:#1a1a1a;min-height:100vh}
+.hero{background:#1a1a1a;color:#fff;padding:2rem 1.25rem 1.5rem}
+.hero-tag{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:6px}
+.hero-title{font-size:26px;font-weight:600;margin-bottom:4px}
+.hero-sub{font-size:14px;color:#aaa;margin-bottom:1.25rem}
+.lang-toggle{display:flex;gap:8px}
+.lang-btn{padding:6px 16px;border-radius:20px;border:1px solid #444;background:transparent;color:#aaa;font-size:13px;cursor:pointer;transition:all 0.2s}
+.lang-btn.active{background:#fff;color:#1a1a1a;border-color:#fff}
+.hero-map{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;color:#ccc;font-size:13px;text-decoration:none;border-bottom:1px solid #444;padding-bottom:2px}
+.container{max-width:600px;margin:0 auto;padding:1rem}
+.section{background:#fff;border-radius:12px;margin-bottom:0.75rem;overflow:hidden;border:1px solid #ece9e3}
+.section-header{display:flex;align-items:center;gap:10px;padding:1rem 1.25rem;cursor:pointer;user-select:none}
+.section-icon{width:32px;height:32px;border-radius:8px;background:#f0ede8;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.section-title{font-size:15px;font-weight:600;flex:1;color:#1a1a1a}
+.section-chevron{font-size:18px;color:#999;transition:transform 0.25s}
+.section-body{padding:0 1.25rem 1.25rem;display:none}
+.section-body.open{display:block}
+.section-header.open .section-chevron{transform:rotate(180deg)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0.75rem}
+.info-card{background:#f7f5f0;border-radius:8px;padding:0.75rem}
+.info-card-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+.info-card-value{font-size:15px;font-weight:600;color:#1a1a1a}
+.wifi-box{background:#1a1a1a;color:#fff;border-radius:10px;padding:1rem 1.25rem;margin-bottom:8px}
+.wifi-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+.wifi-value{font-size:16px;font-weight:600;font-family:monospace;letter-spacing:0.05em}
+.place{padding:10px 0;border-bottom:1px solid #f0ede8}
+.place:last-child{border-bottom:none}
+.place-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:3px}
+.place-name{font-size:14px;font-weight:600;color:#1a1a1a}
+.place-rating{font-size:12px;color:#f59e0b;font-weight:600;white-space:nowrap}
+.place-desc{font-size:12px;color:#666;line-height:1.4;margin-bottom:5px}
+.place-meta{font-size:11px;color:#999;margin-bottom:5px}
+.map-link{font-size:12px;color:#2563eb;text-decoration:none;display:inline-flex;align-items:center;gap:3px}
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin-left:5px;font-weight:500}
+.badge-reserve{background:#ede9fe;color:#5b21b6}
+.rule{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f0ede8;font-size:14px}
+.rule:last-child{border-bottom:none}
+.rule-icon{font-size:16px;width:24px;text-align:center}
+.tip{font-size:13px;color:#555;line-height:1.5;padding:8px 0}
+.service-item{padding:10px 0;border-bottom:1px solid #f0ede8}
+.service-item:last-child{border-bottom:none}
+.service-name{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.service-desc{font-size:12px;color:#666;margin-bottom:5px}
+.divider{height:1px;background:#f0ede8;margin:10px 0}
+.footer{text-align:center;padding:2rem 1rem;color:#999;font-size:12px}
+.emergency-box{background:#fff1f1;border:1px solid #fecaca;border-radius:10px;padding:1rem 1.25rem}
+.emergency-title{font-size:13px;font-weight:600;color:#991b1b;margin-bottom:8px}
+.emergency-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid #fecaca}
+.emergency-row:last-child{border-bottom:none}
+.emergency-label{color:#666}
+.emergency-num{font-weight:600;color:#1a1a1a}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Porto Haven</div>
+  <div class="hero-title">Cedofeita 101</div>
+  <div class="hero-sub">Rua de Cedofeita, 213 · 1º A · Porto</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('pt')">Português</button>
+  </div>
+  <a href="https://maps.google.com/?q=Rua+de+Cedofeita+213+Porto" target="_blank" class="hero-map">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <div class="section-icon">🔑</div>
+      <div class="section-title" data-en="Check-in & check-out" data-pt="Check-in & check-out">Check-in & check-out</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body open">
+      <div class="info-grid">
+        <div class="info-card"><div class="info-card-label" data-en="Check-in" data-pt="Check-in">Check-in</div><div class="info-card-value">16:00 – 00:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Check-out" data-pt="Check-out">Check-out</div><div class="info-card-value" data-en="by 11:00" data-pt="até às 11:00">by 11:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Drop bags (arrival)" data-pt="Deixar malas (chegada)">Drop bags (arrival)</div><div class="info-card-value" data-en="from 12:00" data-pt="a partir das 12:00">from 12:00</div></div>
+        <div class="info-card"><div class="info-card-label" data-en="Drop bags (departure)" data-pt="Deixar malas (saída)">Drop bags (departure)</div><div class="info-card-value" data-en="until 13:00" data-pt="até às 13:00">until 13:00</div></div>
+      </div>
+      <p class="tip" data-en="Self check-in. Your access code is sent 48 hours before arrival. The building has a lift." data-pt="Self check-in. O código de acesso é enviado 48h antes da chegada. O prédio tem elevador.">Self check-in. Your access code is sent 48 hours before arrival. The building has a lift.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">📶</div>
+      <div class="section-title">Wi-Fi</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="wifi-box">
+        <div class="wifi-label" data-en="Network" data-pt="Rede">Network</div>
+        <div class="wifi-value">Abacatur 1</div>
+      </div>
+      <div class="wifi-box">
+        <div class="wifi-label">Password</div>
+        <div class="wifi-value">@PHabacatur1*</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🍽️</div>
+      <div class="section-title" data-en="Restaurants & cafés" data-pt="Restaurantes & cafés">Restaurants & cafés</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-header"><div class="place-name">1858 BBGourmet Criativo</div><div class="place-rating">⭐ fine dining</div></div>
+        <div class="place-desc" data-en="Creative fine dining, one of the best restaurants in Porto. Right on your street." data-pt="Fine dining criativo, um dos melhores restaurantes do Porto. Mesmo na tua rua.">Creative fine dining, one of the best restaurants in Porto. Right on your street.</div>
+        <div class="place-meta" data-en="Daily 12:00–22:30 (Fri–Sat until 23:00)" data-pt="Diário 12h–22h30 (Sex–Sáb até 23h)">Daily 12:00–22:30 (Fri–Sat until 23:00)</div>
+        <a href="https://maps.google.com/?q=1858+BBGourmet+Criativo+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Capim Dourado</div><div class="place-rating">⭐ Brazilian</div></div>
+        <div class="place-desc" data-en="Excellent Brazilian cuisine with a Porto twist. Lively atmosphere, great flavours." data-pt="Excelente cozinha brasileira com toque portuense. Ambiente animado, sabores ótimos.">Excellent Brazilian cuisine with a Porto twist. Lively atmosphere, great flavours.</div>
+        <div class="place-meta" data-en="Mon–Thu 19:30–23:00 · Fri–Sat 19:30–00:00 · Sun 12:30–16:00 & 19:30–23:00" data-pt="Seg–Qui 19h30–23h · Sex–Sáb 19h30–00h · Dom 12h30–16h & 19h30–23h">Mon–Thu 19:30–23:00 · Fri–Sat 19:30–00:00 · Sun 12:30–16:00 & 19:30–23:00</div>
+        <a href="https://maps.google.com/?q=Capim+Dourado+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Restaurante Rittos</div><div class="place-rating">⭐ Portuguese</div></div>
+        <div class="place-desc" data-en="Classic Portuguese tavern, great value. A neighbourhood staple." data-pt="Taberna portuguesa clássica, excelente relação qualidade-preço. Um clássico do bairro.">Classic Portuguese tavern, great value. A neighbourhood staple.</div>
+        <div class="place-meta" data-en="Mon–Fri 9:00–18:00 · Sat 9:00–17:00" data-pt="Seg–Sex 9h–18h · Sáb 9h–17h">Mon–Fri 9:00–18:00 · Sat 9:00–17:00</div>
+        <a href="https://maps.google.com/?q=Restaurante+Rittos+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">LM Art Kitchen</div><div class="place-rating">⭐ garden terrace</div></div>
+        <div class="place-desc" data-en="Lovely garden terrace, great for brunch and lunch. Creative menu in a relaxed setting." data-pt="Linda esplanada com jardim, ótimo para brunch e almoço. Menu criativo em ambiente descontraído.">Lovely garden terrace, great for brunch and lunch. Creative menu in a relaxed setting.</div>
+        <div class="place-meta" data-en="Weekdays 10:00–18:00 · Weekends 9:00–19:00" data-pt="Dias de semana 10h–18h · Fins de semana 9h–19h">Weekdays 10:00–18:00 · Weekends 9:00–19:00</div>
+        <a href="https://maps.google.com/?q=LM+Art+Kitchen+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Cafés & brunch" data-pt="Cafés & brunch">Cafés & brunch</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Comum</div><div class="place-rating">⭐ specialty coffee</div></div>
+        <div class="place-desc" data-en="Specialty coffee, shakshuka and a sunny courtyard. A Cedofeita favourite." data-pt="Café de especialidade, shakshuka e pátio ensolarado. Um favorito de Cedofeita.">Specialty coffee, shakshuka and a sunny courtyard. A Cedofeita favourite.</div>
+        <div class="place-meta" data-en="Daily 9:00–17:00" data-pt="Diário 9h–17h">Daily 9:00–17:00</div>
+        <a href="https://maps.google.com/?q=Comum+cafe+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">BEIJI café & pâtisserie</div><div class="place-rating">⭐ pastries</div></div>
+        <div class="place-desc" data-en="Cosy and charming with beautiful pastries. A lovely spot for breakfast." data-pt="Acolhedor e encantador com pastéis deliciosos. Ótimo para o pequeno-almoço.">Cosy and charming with beautiful pastries. A lovely spot for breakfast.</div>
+        <div class="place-meta" data-en="Tue–Sun 9:00–18:00" data-pt="Ter–Dom 9h–18h">Tue–Sun 9:00–18:00</div>
+        <a href="https://maps.google.com/?q=BEIJI+cafe+patisserie+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Apartamento Coffee & Snacks</div><div class="place-rating">⭐ pancakes</div></div>
+        <div class="place-desc" data-en="Fluffy pancakes and great latte art. Perfect for a lazy morning." data-pt="Panquecas fofas e latte art incrível. Perfeito para uma manhã preguiçosa.">Fluffy pancakes and great latte art. Perfect for a lazy morning.</div>
+        <div class="place-meta" data-en="Mon, Sat & Sun 9:00–17:00" data-pt="Seg, Sáb & Dom 9h–17h">Mon, Sat & Sun 9:00–17:00</div>
+        <a href="https://maps.google.com/?q=Apartamento+Coffee+Snacks+Rua+Cedofeita+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Rooftop bars" data-pt="Rooftop bars">Rooftop bars</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Terraço do Jardim</div><div class="place-rating">⭐ 4.4 · city views</div></div>
+        <div class="place-desc" data-en="Rooftop lounge with stunning city views, great cocktails and a warm atmosphere." data-pt="Rooftop com vistas deslumbrantes da cidade, cocktails e ambiente acolhedor.">Rooftop lounge with stunning city views, great cocktails and a warm atmosphere.</div>
+        <div class="place-meta" data-en="Daily 11:00–00:00" data-pt="Diário 11h–00h">Daily 11:00–00:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJh1ZsQQBlJA0RNY_5IS7Ix58" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Amura Bar & Rooftop</div><div class="place-rating">⭐ 4.5 · river views</div></div>
+        <div class="place-desc" data-en="Beautiful rooftop overlooking the Douro river. Great atmosphere and friendly service." data-pt="Rooftop com vistas para o Douro. Excelente ambiente e serviço simpático.">Beautiful rooftop overlooking the Douro river. Great atmosphere and friendly service.</div>
+        <div class="place-meta" data-en="Daily 11:00–23:30" data-pt="Diário 11h–23h30">Daily 11:00–23:30</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ31kEd4FlJA0R6My2TrmhC6o" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🛒</div>
+      <div class="section-title" data-en="Supermarkets" data-pt="Supermercados">Supermarkets</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name">SPAR Cedofeita</div>
+        <div class="place-desc" data-en="Right next door at nº 230! Mon–Sat 10:00–21:30." data-pt="Mesmo ao lado, no nº 230! Seg–Sáb 10h–21h30.">Right next door at nº 230! Mon–Sat 10:00–21:30.</div>
+        <a href="https://maps.google.com/?q=SPAR+Rua+Cedofeita+230+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-name">Pingo Doce</div>
+        <div class="place-desc" data-en="Full supermarket at nº 435, great for a proper shop. Daily 8:00–21:00." data-pt="Supermercado completo no nº 435, ótimo para fazer compras. Diário 8h–21h.">Full supermarket at nº 435, great for a proper shop. Daily 8:00–21:00.</div>
+        <a href="https://maps.google.com/?q=Pingo+Doce+Rua+Cedofeita+435+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-name">My Auchan</div>
+        <div class="place-desc" data-en="At nº 80, open daily 8:00–21:00." data-pt="No nº 80, aberto todos os dias 8h–21h.">At nº 80, open daily 8:00–21:00.</div>
+        <a href="https://maps.google.com/?q=Auchan+Rua+Cedofeita+80+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🚇</div>
+      <div class="section-title" data-en="Getting around" data-pt="Transportes">Getting around</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="service-item">
+        <div class="service-name" data-en="Metro — Lapa (Yellow Line)" data-pt="Metro — Lapa (Linha Amarela)">Metro — Lapa (Yellow Line)</div>
+        <div class="service-desc" data-en="~5 min walk. Connects to Trindade (city centre hub) and Casa da Música." data-pt="~5 min a pé. Liga ao Trindade (centro) e à Casa da Música.">~5 min walk. Connects to Trindade (city centre hub) and Casa da Música.</div>
+        <a href="https://maps.google.com/?q=Metro+Lapa+Porto" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name" data-en="Taxi / Rideshare" data-pt="Taxi / Rideshare">Taxi / Rideshare</div>
+        <div class="service-desc" data-en="Taxi rank at Praça do Marquês (~10 min walk). Also available: Uber, Bolt, Free Now." data-pt="Praça de taxis no Marquês (~10 min a pé). Também disponível: Uber, Bolt, Free Now.">Taxi rank at Praça do Marquês (~10 min walk). Also available: Uber, Bolt, Free Now.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJX8i6JlhkJA0RKTZK8UjKbAU" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name" data-en="Airport transfer" data-pt="Transfer aeroporto">Airport transfer</div>
+        <div class="service-desc" data-en="Book a direct ride to/from the apartment." data-pt="Reserva uma viagem direta de/para o apartamento.">Book a direct ride to/from the apartment.</div>
+        <a href="https://welc.io/ps/RGpgPROV" target="_blank" class="map-link">🚗 <span data-en="Book transfer" data-pt="Reservar transfer">Book transfer</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🅿️</div>
+      <div class="section-title" data-en="Parking" data-pt="Estacionamento">Parking</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name">Luis Vaz Medeiros</div>
+        <div class="place-desc" data-en="Rua de Cedofeita 457 · ~€10/day · Mon–Sat 8:00–21:00 (closed Sundays)." data-pt="Rua de Cedofeita 457 · ~€10/dia · Seg–Sáb 8h–21h (fechado domingos).">Rua de Cedofeita 457 · ~€10/day · Mon–Sat 8:00–21:00 (closed Sundays).</div>
+      </div>
+      <div class="place">
+        <div class="place-name">Parking Recolhas</div>
+        <div class="place-desc" data-en="Rua de Cedofeita 538 · ~€15/24h · Open 24 hours (confirm arrival with staff)." data-pt="Rua de Cedofeita 538 · ~€15/24h · Aberto 24h (confirma chegada com a equipa).">Rua de Cedofeita 538 · ~€15/24h · Open 24 hours (confirm arrival with staff).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🏪</div>
+      <div class="section-title" data-en="Useful services nearby" data-pt="Serviços úteis perto">Useful services nearby</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Pharmacy" data-pt="Farmácia">Pharmacy</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Farmácia Figueiredo</div><div class="place-rating">⭐ 4.2</div></div>
+        <div class="place-desc" data-en="Helpful and knowledgeable staff. Right on your street at nº 132." data-pt="Equipa prestável e conhecedora. Mesmo na tua rua, no nº 132.">Helpful and knowledgeable staff. Right on your street at nº 132.</div>
+        <div class="place-meta" data-en="Mon–Fri 9:00–20:00 · Sat 9:00–13:00" data-pt="Seg–Sex 9h–20h · Sáb 9h–13h">Mon–Fri 9:00–20:00 · Sat 9:00–13:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJG9VsowJlJA0RGV1vss5sxdI" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Hair salon / Barber" data-pt="Cabeleireiro / Barbearia">Hair salon / Barber</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">TGS Barber</div><div class="place-rating">⭐ 4.9 · 93 reviews</div></div>
+        <div class="place-desc" data-en="Excellent barber on your street at nº 561. Speaks English, very reasonable prices." data-pt="Excelente barbearia na tua rua, no nº 561. Fala inglês, preços muito razoáveis.">Excellent barber on your street at nº 561. Speaks English, very reasonable prices.</div>
+        <div class="place-meta" data-en="Mon–Sat 9:00–21:00 · Sun 11:00–21:00" data-pt="Seg–Sáb 9h–21h · Dom 11h–21h">Mon–Sat 9:00–21:00 · Sun 11:00–21:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJ1fDh5otlJA0RGmZIAdTatUY" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">GS Beauty Salon</div><div class="place-rating">⭐ 4.8 · hair & nails</div></div>
+        <div class="place-desc" data-en="Hair colour, cuts and nail extensions. Professional and friendly. At nº 170." data-pt="Coloração, cortes e extensões de unhas. Profissional e simpático. No nº 170.">Hair colour, cuts and nail extensions. Professional and friendly. At nº 170.</div>
+        <div class="place-meta" data-en="Daily 10:00–20:00" data-pt="Diário 10h–20h">Daily 10:00–20:00</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJc5H3qzdlJA0R_3bJ1fhNmSs" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="Laundry" data-pt="Lavandaria">Laundry</p>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Conforto Limpeza</div><div class="place-rating">⭐ 4.7 · 117 reviews</div></div>
+        <div class="place-desc" data-en="Drop-off and self-service. Wash, dry and fold available. Detergent included. Open daily 7:00–23:00." data-pt="Entrega e self-service. Lavar, secar e dobrar disponível. Detergente incluído. Diário 7h–23h.">Drop-off and self-service. Wash, dry and fold available. Detergent included. Open daily 7:00–23:00.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJpRUGl0RlJA0RM-AXxGD0oz4" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa">View on map</span></a>
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:12px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px" data-en="ATM / Cash" data-pt="Multibanco">ATM / Cash</p>
+      <div class="place">
+        <div class="place-name" data-en="Multibanco — Rua de Cedofeita" data-pt="Multibanco — Rua de Cedofeita">Multibanco — Rua de Cedofeita</div>
+        <div class="place-desc" data-en="Use Multibanco (MB) machines — avoid Euronet ATMs on the street (very high fees)." data-pt="Usa máquinas Multibanco (MB) — evita os Euronet na rua (taxas muito altas).">Use Multibanco (MB) machines — avoid Euronet ATMs on the street (very high fees).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🧳</div>
+      <div class="section-title" data-en="Luggage storage" data-pt="Guarda-bagagem">Luggage storage</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="service-item">
+        <div class="service-name">Bounce</div>
+        <div class="service-desc" data-en="Storage locations nearby from €1/day. 5% discount with our link." data-pt="Locais de armazenamento perto, a partir de €1/dia. 5% de desconto com o nosso link.">Storage locations nearby from €1/day. 5% discount with our link.</div>
+        <a href="https://go.bounce.com/PORTOHAVEN7471817336" target="_blank" class="map-link">🔗 <span data-en="Book with discount" data-pt="Reservar com desconto">Book with discount</span></a>
+      </div>
+      <div class="service-item">
+        <div class="service-name">LUGGit</div>
+        <div class="service-desc" data-en="Collects and delivers your bags wherever and whenever you want. 10% discount for our guests." data-pt="Recolhe e entrega a tua bagagem onde e quando quiseres. 10% de desconto para os nossos hóspedes.">Collects and delivers your bags wherever and whenever you want. 10% discount for our guests.</div>
+        <a href="https://luggit.app/partner/porto-haven" target="_blank" class="map-link">🔗 <span data-en="Book with discount" data-pt="Reservar com desconto">Book with discount</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🗺️</div>
+      <div class="section-title" data-en="Things to do" data-pt="O que visitar">Things to do</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="place">
+        <div class="place-name">Casa da Música</div>
+        <div class="place-desc" data-en="Iconic concert hall, one of Porto's most striking buildings. Check the programme online." data-pt="Sala de concertos icónica, um dos edifícios mais marcantes do Porto. Consulta a programação online.">Iconic concert hall, one of Porto's most striking buildings. Check the programme online.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="São Bento Station" data-pt="Estação de São Bento">São Bento Station</div>
+        <div class="place-desc" data-en="Stunning azulejo tile panels. Free to enter — don't miss it." data-pt="Painéis de azulejos impressionantes. Entrada gratuita — não percas.">Stunning azulejo tile panels. Free to enter — don't miss it.</div>
+      </div>
+      <div class="place">
+        <div class="place-name">Livraria Lello</div>
+        <div class="place-desc" data-en="One of the world's most beautiful bookshops. Book tickets online to avoid queues." data-pt="Uma das livrarias mais bonitas do mundo. Compra bilhetes online para evitar filas.">One of the world's most beautiful bookshops. Book tickets online to avoid queues.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Ribeira & D. Luís Bridge" data-pt="Ribeira & Ponte D. Luís">Ribeira & D. Luís Bridge</div>
+        <div class="place-desc" data-en="Walk the riverside and cross to Gaia for Port wine cellars and stunning views." data-pt="Passeio junto ao rio e atravessa até Gaia para as caves de vinho do Porto e vistas deslumbrantes.">Walk the riverside and cross to Gaia for Port wine cellars and stunning views.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Rua das Flores & Avenida dos Aliados" data-pt="Rua das Flores & Avenida dos Aliados">Rua das Flores & Avenida dos Aliados</div>
+        <div class="place-desc" data-en="Beautiful pedestrian street and Porto's grand boulevard — both within walking distance." data-pt="Bela rua pedonal e a grande avenida do Porto — ambas a curta distância a pé.">Beautiful pedestrian street and Porto's grand boulevard — both within walking distance.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Torre dos Clérigos" data-pt="Torre dos Clérigos">Torre dos Clérigos</div>
+        <div class="place-desc" data-en="Iconic baroque tower with 360° panoramic views of Porto. Worth the climb." data-pt="Torre barroca icónica com vistas panorâmicas 360°. Vale bem a subida.">Iconic baroque tower with 360° panoramic views of Porto. Worth the climb.</div>
+      </div>
+      <div class="place">
+        <div class="place-name" data-en="Foz do Douro" data-pt="Foz do Douro">Foz do Douro</div>
+        <div class="place-desc" data-en="Where the Douro meets the Atlantic. Walk along Avenida Brasil and stop at Docemar for amazing croissants." data-pt="Onde o Douro encontra o Atlântico. Passeio pela Avenida Brasil e para no Docemar para croissants incríveis.">Where the Douro meets the Atlantic. Walk along Avenida Brasil and stop at Docemar for amazing croissants.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">📋</div>
+      <div class="section-title" data-en="House rules" data-pt="Regras da casa">House rules</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="rule"><div class="rule-icon">🚭</div><span data-en="No smoking" data-pt="Proibido fumar">No smoking</span></div>
+      <div class="rule"><div class="rule-icon">🎉</div><span data-en="No parties or events" data-pt="Sem festas ou eventos">No parties or events</span></div>
+      <div class="rule"><div class="rule-icon">🐾</div><span data-en="No pets" data-pt="Sem animais">No pets</span></div>
+      <div class="rule"><div class="rule-icon">🚫</div><span data-en="No external visitors" data-pt="Sem visitas externas">No external visitors</span></div>
+      <div class="rule"><div class="rule-icon">👥</div><span data-en="Maximum 4 guests" data-pt="Máximo 4 hóspedes">Maximum 4 guests</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <div class="section-icon">🆘</div>
+      <div class="section-title" data-en="Emergency contacts" data-pt="Contactos de emergência">Emergency contacts</div>
+      <div class="section-chevron">›</div>
+    </div>
+    <div class="section-body">
+      <div class="emergency-box">
+        <div class="emergency-title" data-en="Emergency numbers" data-pt="Números de emergência">Emergency numbers</div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Emergency (EU)" data-pt="Emergência (EU)">Emergency (EU)</span><span class="emergency-num">112</span></div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Police (PSP)" data-pt="Polícia (PSP)">Police (PSP)</span><span class="emergency-num">222 092 000</span></div>
+        <div class="emergency-row"><span class="emergency-label" data-en="Hospital St António" data-pt="Hospital St António">Hospital St António</span><span class="emergency-num">222 077 500</span></div>
+      </div>
+      <p class="tip" style="margin-top:0.75rem" data-en="For any issue with the apartment, please message us through your booking platform and we'll get back to you as soon as possible." data-pt="Para qualquer problema com o apartamento, envia-nos uma mensagem pela plataforma de reserva e responderemos o mais brevemente possível.">For any issue with the apartment, please message us through your booking platform and we'll get back to you as soon as possible.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p data-en="Porto Haven · Cedofeita 101 · We hope you have a wonderful stay!" data-pt="Porto Haven · Cedofeita 101 · Esperamos que tenhas uma estadia maravilhosa!">Porto Haven · Cedofeita 101 · We hope you have a wonderful stay!</p>
+</div>
+
+<script>
+function toggle(header){
+  const body=header.nextElementSibling;
+  const open=body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  header.classList.toggle('open',!open);
+}
+function setLang(lang){
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent=el.getAttribute('data-'+lang)||el.getAttribute('data-en');
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.classList.toggle('active',(lang==='pt'&&btn.textContent==='Português')||(lang==='en'&&btn.textContent==='English'));
+  });
+}
+</script>
+</body>
+</html>`;
+
 app.get('/guia', (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send(GUIDE_HTML);
 });
- 
+
+app.get('/guia-cedofeita', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(GUIDE_CEDOFEITA_HTML);
+});
+
 app.get('/', (req, res) => res.json({
   status: 'online',
-  service: 'Alegria 93 — AI Guest Assistant',
-  guide: '/guia',
+  service: 'Porto Haven — AI Guest Assistant',
+  guides: { alegria93: '/guia', cedofeita101: '/guia-cedofeita' },
   timestamp: new Date().toISOString(),
 }));
- 
+
 app.listen(PORT, () => {
-  console.log(`🏠 Assistente Alegria 93 a correr na porta ${PORT}`);
-  console.log(`📖 Guia disponível em /guia`);
-  console.log(`🔄 Polling ativo — só Alegria 93 (ID: ${APARTMENT_ID})`);
+  console.log(`🏠 Porto Haven AI a correr na porta ${PORT}`);
+  console.log(`📖 Guia Alegria 93: /guia`);
+  console.log(`📖 Guia Cedofeita 101: /guia-cedofeita`);
+  console.log(`🔄 Polling ativo — Alegria 93 (ID: ${APARTMENT_ID})`);
 });
- 
