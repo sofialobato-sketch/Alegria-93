@@ -652,7 +652,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="info-card"><div class="info-card-label" data-en="Drop bags (arrival)" data-pt="Deixar malas (chegada)">Drop bags (arrival)</div><div class="info-card-value" data-en="from 12:00" data-pt="a partir das 12:00">from 12:00</div></div>
         <div class="info-card"><div class="info-card-label" data-en="Drop bags (departure)" data-pt="Deixar malas (saída)">Drop bags (departure)</div><div class="info-card-value" data-en="until 13:00" data-pt="até às 13:00">until 13:00</div></div>
       </div>
-      <p class="tip" data-en="Self check-in. Your access code is sent 48 hours before arrival. The building has a lift." data-pt="Self check-in. O código de acesso é enviado 48h antes da chegada. O prédio tem elevador.">Self check-in. Your access code is sent 48 hours before arrival. The building has a lift.</p>
+      <p class="tip" data-en="Self check-in. Your access code is sent 48 hours before arrival. The building has a lift.</p>
+      <p class="tip" data-en="Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum." data-pt="Infelizmente não conseguimos garantir early check-in ou late check-out pois normalmente estamos completamente reservados, mas podes deixar as malas no apartamento a partir das 12:00 no dia de chegada, ou deixar as malas no apartamento no dia de saída até às 13:00 no máximo.">Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum.</p>
     </div>
   </div>
 
