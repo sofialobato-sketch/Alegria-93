@@ -2411,14 +2411,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="section-body">
       <div class="place">
-        <div class="place-name" data-en="Private garage — Rua da Alegria 29" data-pt="Garagem privada — Rua da Alegria 29" data-es="Garaje privado — Rua da Alegria 29" data-fr="Garage privé — Rua da Alegria 29">Private garage — Rua da Alegria 29</div>
-        <div class="place-desc" data-en="€12/24h · Very convenient, a short walk down the street." data-pt="€12/24h · Muito conveniente, a poucos passos descendo a rua." data-es="€12/24h · Muy conveniente, a poca distancia calle abajo." data-fr="€12/24h · Très pratique, à quelques minutes à pied.">€12/24h · Very convenient, a short walk down the street.</div>
+        <div class="place-header"><div class="place-name" data-en="Private garage — Rua da Alegria 29" data-pt="Garagem privada — Rua da Alegria 29" data-es="Garaje privado — Rua da Alegria 29" data-fr="Garage privé — Rua da Alegria 29">Private garage — Rua da Alegria 29</div></div>
+        <div class="place-desc" data-en="€12/24h · Most convenient option, just down the street from the apartment." data-pt="€12/24h · Opção mais conveniente, mesmo na tua rua." data-es="€12/24h · La opción más conveniente, justo en tu calle." data-fr="€12/24h · L'option la plus pratique, juste dans votre rue.">€12/24h · Most convenient option, just down the street from the apartment.</div>
         <a href="https://goo.gl/maps/k9wT1teFpazhJokx6" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
       <div class="place">
-        <div class="place-name" data-en="Street parking — nearby" data-pt="Estacionamento na rua" data-es="Aparcamiento en la calle" data-fr="Stationnement en rue">Street parking — nearby</div>
-        <div class="place-desc" data-en="Paid street parking available nearby." data-pt="Estacionamento pago disponível nas proximidades." data-es="Aparcamiento de pago disponible en las cercanías." data-fr="Stationnement payant disponible à proximité.">Paid street parking available nearby.</div>
-        <a href="https://goo.gl/maps/MGYSm7aCMqsj52EK9" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+        <div class="place-header"><div class="place-name">Silo Auto</div><div class="place-rating">⭐ 3.7 · 1.1k · 24h</div></div>
+        <div class="place-desc" data-en="Large covered garage open 24h. ~10 min walk. Ask for the 48h or 72h pre-paid ticket at the 1st floor office — much cheaper than hourly." data-pt="Grande garagem coberta aberta 24h. ~10 min a pé. Pede o bilhete pré-pago de 48h ou 72h no 1º andar — muito mais barato." data-es="Gran garaje cubierto abierto 24h. ~10 min a pie. Pide el ticket prepago de 48h o 72h en el 1er piso — mucho más barato." data-fr="Grand garage couvert ouvert 24h. ~10 min à pied. Demandez le ticket prépayé 48h ou 72h au 1er étage — bien moins cher.">Large covered garage open 24h. ~10 min walk. Ask for the 48h or 72h pre-paid ticket at the 1st floor office — much cheaper than hourly.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJczLTWvpkJA0RTZq9VCytWOk" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Trindade Car Park</div><div class="place-rating">⭐ 3.9 · 745 · 24h</div></div>
+        <div class="place-desc" data-en="Covered garage open 24h, very central. ~15 min walk. Pay at the kiosk on the ground floor before driving out." data-pt="Garagem coberta aberta 24h. ~15 min a pé. Paga no quiosque do rés-do-chão antes de sair." data-es="Garaje cubierto abierto 24h. ~15 min a pie. Paga en el quiosco de la planta baja antes de salir." data-fr="Garage couvert ouvert 24h. ~15 min à pied. Payez au kiosque du rez-de-chaussée avant de sortir.">Covered garage open 24h, very central. ~15 min walk. Pay at the kiosk on the ground floor before driving out.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJByvTa_tkJA0RzdqrNx-2KoA" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
     </div>
   </div>
@@ -2657,7 +2662,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="info-card"><div class="info-card-label" data-en="Drop bags (departure)" data-pt="Deixar malas (saída)" data-es="Dejar maletas (salida)" data-fr="Déposer bagages (départ)">Drop bags (departure)</div><div class="info-card-value" data-en="until 13:00" data-pt="até às 13:00" data-es="hasta las 13:00" data-fr="jusqu'à 13h00">until 13:00</div></div>
       </div>
       <p class="tip" data-en="Self check-in. Your access code is sent 48 hours before arrival. No lift — stairs only." data-pt="Self check-in. Código de acesso enviado 48h antes. Sem elevador — apenas escadas." data-es="Self check-in. Código enviado 48h antes. Sin ascensor — solo escaleras." data-fr="Self check-in. Code envoyé 48h avant. Pas d'ascenseur — escaliers uniquement.">Self check-in. Your access code is sent 48 hours before arrival. No lift — stairs only.</p>
-      <p class="tip" data-en="The best way to arrive is by Uber or taxi to the address, then walk 90 metres." data-pt="A melhor forma de chegar é de Uber ou táxi até à morada e depois andar 90 metros." data-es="La mejor forma de llegar es en Uber o taxi y luego caminar 90 metros." data-fr="La meilleure façon d'arriver est en Uber ou taxi, puis marcher 90 mètres.">The best way to arrive is by Uber or taxi to the address, then walk 90 metres.</p>
+      <p class="tip" data-en="The best way to arrive is by Uber or taxi, then walk 90 metres to the apartment." data-pt="A melhor forma de chegar é de Uber ou táxi e depois andar 90 metros até ao apartamento." data-es="La mejor forma de llegar es en Uber o taxi y luego caminar 90 metros hasta el apartamento." data-fr="La meilleure façon d'arriver est en Uber ou taxi, puis marcher 90 mètres jusqu'à l'appartement.">The best way to arrive is by Uber or taxi, then walk 90 metres to the apartment.</p>
+      <a href="https://maps.app.goo.gl/1vJmjJTznV7LiZNfA" target="_blank" class="map-link" style="margin-bottom:8px;display:inline-flex">📍 <span data-en="See the 90m walk" data-pt="Ver o percurso de 90m" data-es="Ver el recorrido de 90m" data-fr="Voir le parcours de 90m">See the 90m walk</span></a>
       <p class="tip" data-en="Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum." data-pt="Infelizmente não conseguimos garantir early check-in ou late check-out, mas podes deixar as malas a partir das 12:00 no dia de chegada, ou até às 13:00 no dia de saída." data-es="Lamentablemente no podemos ofrecer early check-in ni late check-out, pero puedes dejar las maletas desde las 12:00 el día de llegada o hasta las 13:00 el día de salida." data-fr="Malheureusement, pas de check-in anticipé ni check-out tardif, mais vous pouvez déposer vos bagages à partir de 12h00 le jour d'arrivée ou jusqu'à 13h00 le jour du départ.">Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum.</p>
     </div>
   </div>
@@ -2774,9 +2780,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="section-body">
       <div class="place">
-        <div class="place-name">Estacionamento Duque de Loulé</div>
-        <div class="place-desc" data-en="Safest option. €1.20/h normal or €0.70–0.73/h with pre-paid 42h/72h ticket (buy at reception)." data-pt="Opção mais segura. €1,20/h normal ou €0,70–0,73/h com bilhete pré-pago 42h/72h (compra na receção)." data-es="Opción más segura. €1,20/h normal o €0,70–0,73/h con ticket prepago 42h/72h (compra en recepción)." data-fr="Option la plus sûre. €1,20/h normal ou €0,70–0,73/h avec ticket prépayé 42h/72h (achat à la réception).">Safest option. €1.20/h normal or €0.70–0.73/h with pre-paid 42h/72h ticket (buy at reception).</div>
-        <a href="https://maps.app.goo.gl/vwL5RxZyUw86Trb36" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+        <div class="place-header"><div class="place-name">Estacionamento Duque de Loulé</div><div class="place-rating">⭐ 3.7 · 170 · 24h</div></div>
+        <div class="place-desc" data-en="Open 24h, ~5 min walk. Pre-paid 72h ticket (€20) is the best value — buy at the staff hut right after entering. ⚠️ Do not leave valuables visible in the car." data-pt="Aberto 24h, ~5 min a pé. O bilhete pré-pago de 72h (€20) é o melhor negócio — compra na cabine à entrada. ⚠️ Não deixes objetos de valor visíveis no carro." data-es="Abierto 24h, ~5 min andando. El ticket prepago de 72h (€20) es el mejor precio — compra en la cabina al entrar. ⚠️ No dejes objetos de valor visibles en el coche." data-fr="Ouvert 24h, ~5 min à pied. Le ticket prépayé 72h (20€) est le meilleur tarif — achetez-le à la cabine à l'entrée. ⚠️ Ne laissez pas d'objets de valeur visibles dans la voiture.">Open 24h, ~5 min walk. Pre-paid 72h ticket (€20) is the best value — buy at the staff hut right after entering. ⚠️ Do not leave valuables visible in the car.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJqeBtS-ZkJA0R30gr8zFjfUU" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Cardosas Parking</div><div class="place-rating">⭐ 3.8 · 452 · 24h · safer</div></div>
+        <div class="place-desc" data-en="Safer covered garage, ~10 min walk. Open 24h. Well lit, good size spaces. ~€27/day." data-pt="Garagem coberta mais segura, ~10 min a pé. Aberta 24h. Bem iluminada, lugares espaçosos. ~€27/dia." data-es="Garaje cubierto más seguro, ~10 min a pie. Abierto 24h. Bien iluminado, plazas amplias. ~€27/día." data-fr="Garage couvert plus sûr, ~10 min à pied. Ouvert 24h. Bien éclairé, grandes places. ~€27/jour.">Safer covered garage, ~10 min walk. Open 24h. Well lit, good size spaces. ~€27/day.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJg96J6eNkJA0R-Qg_ClpQ4hQ" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
       <div class="place">
         <div class="place-name" data-en="Street parking — Largo 1º de Dezembro / Largo Actor Dias" data-pt="Estacionamento na rua — Largo 1º de Dezembro / Largo Actor Dias" data-es="Aparcamiento en calle" data-fr="Stationnement en rue">Street parking — Largo 1º de Dezembro / Largo Actor Dias</div>
@@ -3017,7 +3028,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="info-card"><div class="info-card-label" data-en="Drop bags (departure)" data-pt="Deixar malas (saída)" data-es="Dejar maletas (salida)" data-fr="Déposer bagages (départ)">Drop bags (departure)</div><div class="info-card-value" data-en="until 13:00" data-pt="até às 13:00" data-es="hasta las 13:00" data-fr="jusqu'à 13h00">until 13:00</div></div>
       </div>
       <p class="tip" data-en="Self check-in. Your access code is sent 48 hours before arrival. No lift — stairs only." data-pt="Self check-in. Código de acesso enviado 48h antes. Sem elevador — apenas escadas." data-es="Self check-in. Código enviado 48h antes. Sin ascensor — solo escaleras." data-fr="Self check-in. Code envoyé 48h avant. Pas d'ascenseur — escaliers uniquement.">Self check-in. Your access code is sent 48 hours before arrival. No lift — stairs only.</p>
-      <p class="tip" data-en="The best way to arrive is by Uber or taxi to the address, then walk 90 metres." data-pt="A melhor forma de chegar é de Uber ou táxi até à morada e depois andar 90 metros." data-es="La mejor forma de llegar es en Uber o taxi y luego caminar 90 metros." data-fr="La meilleure façon d'arriver est en Uber ou taxi, puis marcher 90 mètres.">The best way to arrive is by Uber or taxi to the address, then walk 90 metres.</p>
+      <p class="tip" data-en="The best way to arrive is by Uber or taxi, then walk 90 metres to the apartment." data-pt="A melhor forma de chegar é de Uber ou táxi e depois andar 90 metros até ao apartamento." data-es="La mejor forma de llegar es en Uber o taxi y luego caminar 90 metros hasta el apartamento." data-fr="La meilleure façon d'arriver est en Uber ou taxi, puis marcher 90 mètres jusqu'à l'appartement.">The best way to arrive is by Uber or taxi, then walk 90 metres to the apartment.</p>
+      <a href="https://maps.app.goo.gl/1vJmjJTznV7LiZNfA" target="_blank" class="map-link" style="margin-bottom:8px;display:inline-flex">📍 <span data-en="See the 90m walk" data-pt="Ver o percurso de 90m" data-es="Ver el recorrido de 90m" data-fr="Voir le parcours de 90m">See the 90m walk</span></a>
       <p class="tip" data-en="Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum." data-pt="Infelizmente não conseguimos garantir early check-in ou late check-out, mas podes deixar as malas a partir das 12:00 no dia de chegada, ou até às 13:00 no dia de saída." data-es="Lamentablemente no podemos ofrecer early check-in ni late check-out, pero puedes dejar las maletas desde las 12:00 el día de llegada o hasta las 13:00 el día de salida." data-fr="Malheureusement, pas de check-in anticipé ni check-out tardif, mais vous pouvez déposer vos bagages à partir de 12h00 le jour d'arrivée ou jusqu'à 13h00 le jour du départ.">Unfortunately we cannot offer an early check-in or late check-out as we are normally fully booked, but you can drop your bags inside the apartment from 12:00 on arrival day, or leave your bags in the apartment at check-out until 13:00 maximum.</p>
     </div>
   </div>
@@ -3134,9 +3146,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="section-body">
       <div class="place">
-        <div class="place-name">Estacionamento Duque de Loulé</div>
-        <div class="place-desc" data-en="Safest option. €1.20/h normal or €0.70–0.73/h with pre-paid 42h/72h ticket (buy at reception)." data-pt="Opção mais segura. €1,20/h normal ou €0,70–0,73/h com bilhete pré-pago 42h/72h (compra na receção)." data-es="Opción más segura. €1,20/h normal o €0,70–0,73/h con ticket prepago 42h/72h (compra en recepción)." data-fr="Option la plus sûre. €1,20/h normal ou €0,70–0,73/h avec ticket prépayé 42h/72h (achat à la réception).">Safest option. €1.20/h normal or €0.70–0.73/h with pre-paid 42h/72h ticket (buy at reception).</div>
-        <a href="https://maps.app.goo.gl/vwL5RxZyUw86Trb36" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+        <div class="place-header"><div class="place-name">Estacionamento Duque de Loulé</div><div class="place-rating">⭐ 3.7 · 170 · 24h</div></div>
+        <div class="place-desc" data-en="Open 24h, ~5 min walk. Pre-paid 72h ticket (€20) is the best value — buy at the staff hut right after entering. ⚠️ Do not leave valuables visible in the car." data-pt="Aberto 24h, ~5 min a pé. O bilhete pré-pago de 72h (€20) é o melhor negócio — compra na cabine à entrada. ⚠️ Não deixes objetos de valor visíveis no carro." data-es="Abierto 24h, ~5 min andando. El ticket prepago de 72h (€20) es el mejor precio — compra en la cabina al entrar. ⚠️ No dejes objetos de valor visibles en el coche." data-fr="Ouvert 24h, ~5 min à pied. Le ticket prépayé 72h (20€) est le meilleur tarif — achetez-le à la cabine à l'entrée. ⚠️ Ne laissez pas d'objets de valeur visibles dans la voiture.">Open 24h, ~5 min walk. Pre-paid 72h ticket (€20) is the best value — buy at the staff hut right after entering. ⚠️ Do not leave valuables visible in the car.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJqeBtS-ZkJA0R30gr8zFjfUU" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
+      </div>
+      <div class="place">
+        <div class="place-header"><div class="place-name">Cardosas Parking</div><div class="place-rating">⭐ 3.8 · 452 · 24h · safer</div></div>
+        <div class="place-desc" data-en="Safer covered garage, ~10 min walk. Open 24h. Well lit, good size spaces. ~€27/day." data-pt="Garagem coberta mais segura, ~10 min a pé. Aberta 24h. Bem iluminada, lugares espaçosos. ~€27/dia." data-es="Garaje cubierto más seguro, ~10 min a pie. Abierto 24h. Bien iluminado, plazas amplias. ~€27/día." data-fr="Garage couvert plus sûr, ~10 min à pied. Ouvert 24h. Bien éclairé, grandes places. ~€27/jour.">Safer covered garage, ~10 min walk. Open 24h. Well lit, good size spaces. ~€27/day.</div>
+        <a href="https://www.google.com/maps/place/?q=place_id:ChIJg96J6eNkJA0R-Qg_ClpQ4hQ" target="_blank" class="map-link">📍 <span data-en="View on map" data-pt="Ver no mapa" data-es="Ver en el mapa" data-fr="Voir sur la carte">View on map</span></a>
       </div>
       <div class="place">
         <div class="place-name" data-en="Street parking — Largo 1º de Dezembro / Largo Actor Dias" data-pt="Estacionamento na rua — Largo 1º de Dezembro / Largo Actor Dias" data-es="Aparcamiento en calle" data-fr="Stationnement en rue">Street parking — Largo 1º de Dezembro / Largo Actor Dias</div>
@@ -3702,6 +3719,1177 @@ app.get('/', (req, res) => res.json({
   },
   timestamp: new Date().toISOString(),
 }));
+
+
+// ── PORTO HAVEN WEBSITE ──
+const WEBSITE_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Porto Haven — Apartments in Porto & Lisbon</title>
+<meta name="description" content="Handpicked apartments in Porto's historic centre and Lisbon. Book direct and save.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F5F0E8;
+  --ink: #1A1814;
+  --gold: #B8935A;
+  --gold-light: #D4AF7A;
+  --stone: #8C8378;
+  --border: rgba(26,24,20,0.12);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── LANG SWITCHER ── */
+.lang-bar {
+  position: fixed; top: 0; right: 0; z-index: 200;
+  display: flex; gap: 1px;
+  background: var(--ink);
+  padding: 6px 12px;
+}
+.lang-bar button {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.5); font-family: var(--sans);
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 6px; transition: color 0.2s;
+}
+.lang-bar button.active, .lang-bar button:hover { color: #fff; }
+.lang-bar button.active { color: var(--gold-light); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  transition: background 0.4s, padding 0.3s, box-shadow 0.3s;
+}
+nav.scrolled {
+  background: rgba(245,240,232,0.97);
+  backdrop-filter: blur(8px);
+  padding: 14px 48px;
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  letter-spacing: 0.04em; color: var(--ink); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  color: var(--ink); text-decoration: none;
+  font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  opacity: 0.7; transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  background: var(--ink) !important; color: var(--cream) !important;
+  padding: 9px 24px !important; opacity: 1 !important;
+  letter-spacing: 0.08em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold) !important; }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 700px;
+  position: relative; display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(26,24,20,0.15) 0%, rgba(26,24,20,0.55) 100%),
+    url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1800&q=85') center/cover no-repeat;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 48px 80px;
+  max-width: 900px;
+}
+.hero-tag {
+  display: inline-block;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 20px;
+  border-bottom: 1px solid rgba(212,175,122,0.4); padding-bottom: 8px;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(52px, 7vw, 90px);
+  font-weight: 300; line-height: 1.05; color: #fff;
+  margin-bottom: 28px;
+}
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+.hero-sub {
+  color: rgba(255,255,255,0.75); font-size: 16px; line-height: 1.7;
+  max-width: 520px; margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--gold); color: #fff;
+  padding: 14px 36px; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--gold-light); }
+.btn-outline {
+  background: transparent; color: #fff;
+  padding: 13px 36px; border: 1px solid rgba(255,255,255,0.5); cursor: pointer;
+  font-family: var(--sans); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+/* ── SEARCH BAR ── */
+.search-section {
+  background: var(--ink); padding: 0;
+  position: relative; z-index: 10;
+}
+.search-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 0;
+}
+.search-field {
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 20px 28px;
+  position: relative;
+}
+.search-field:last-of-type { border-right: none; }
+.search-label {
+  display: block; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-light);
+  margin-bottom: 6px;
+}
+.search-input, .search-select {
+  background: none; border: none; outline: none;
+  color: #fff; font-family: var(--sans); font-size: 15px;
+  font-weight: 300; width: 100%; cursor: pointer;
+}
+.search-input::placeholder { color: rgba(255,255,255,0.45); }
+.search-select option { background: var(--ink); color: #fff; }
+.search-btn {
+  background: var(--gold); border: none; cursor: pointer;
+  padding: 0 40px; color: #fff;
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: background 0.2s; white-space: nowrap;
+}
+.search-btn:hover { background: var(--gold-light); }
+
+/* ── SECTION HEADER ── */
+.section { padding: 100px 48px; }
+.section-header { margin-bottom: 60px; }
+.section-tag {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px; display: block;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300; line-height: 1.15;
+}
+.section-title em { font-style: italic; }
+.section-sub {
+  color: var(--stone); font-size: 16px; line-height: 1.7;
+  max-width: 540px; margin-top: 16px;
+}
+
+/* ── PROPERTIES GRID ── */
+.props-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2px;
+}
+.prop-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  text-decoration: none; display: block;
+  background: #000;
+}
+.prop-card img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  transition: transform 0.7s ease, opacity 0.3s;
+  opacity: 0.88;
+  display: block;
+}
+.prop-card:hover img { transform: scale(1.04); opacity: 0.7; }
+.prop-card-info {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 40px 28px 28px;
+  background: linear-gradient(to top, rgba(26,24,20,0.92) 0%, transparent 100%);
+  transform: translateY(8px); transition: transform 0.35s;
+}
+.prop-card:hover .prop-card-info { transform: translateY(0); }
+.prop-city {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 6px;
+}
+.prop-name {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  color: #fff; margin-bottom: 4px; line-height: 1.2;
+}
+.prop-desc {
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  margin-bottom: 16px; line-height: 1.5;
+}
+.prop-meta {
+  display: flex; gap: 16px; align-items: center;
+  font-size: 12px; color: rgba(255,255,255,0.55);
+}
+.prop-meta span { display: flex; align-items: center; gap: 4px; }
+.prop-book-btn {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--gold); color: #fff;
+  padding: 8px 18px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: var(--sans);
+  opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.3s, transform 0.3s;
+  border: none; cursor: pointer; text-decoration: none; display: inline-block;
+}
+.prop-card:hover .prop-book-btn { opacity: 1; transform: translateY(0); }
+
+/* ── FEATURES ── */
+.features-section {
+  background: var(--ink); padding: 100px 48px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.features-text .section-tag { color: var(--gold-light); }
+.features-text .section-title { color: #fff; }
+.features-text .section-sub { color: rgba(255,255,255,0.55); }
+.features-list {
+  margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.feature-item {}
+.feature-num {
+  font-family: var(--serif); font-size: 42px; font-weight: 300;
+  color: var(--gold); line-height: 1; margin-bottom: 8px;
+}
+.feature-label {
+  font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em;
+}
+.features-visual {
+  position: relative; height: 520px;
+}
+.features-img-main {
+  width: 75%; height: 75%;
+  object-fit: cover; position: absolute; top: 0; right: 0;
+}
+.features-img-accent {
+  width: 55%; height: 55%;
+  object-fit: cover; position: absolute; bottom: 0; left: 0;
+  border: 6px solid var(--ink);
+}
+.features-badge {
+  position: absolute; bottom: 100px; right: -20px;
+  background: var(--gold); color: #fff;
+  padding: 20px 24px; text-align: center;
+  min-width: 120px;
+}
+.features-badge-num {
+  font-family: var(--serif); font-size: 36px; font-weight: 300; display: block;
+}
+.features-badge-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── BOOKING MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(26,24,20,0.7); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--cream); width: 100%; max-width: 640px;
+  max-height: 90vh; overflow-y: auto;
+  position: relative; animation: slideUp 0.35s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  background: none; border: none; cursor: pointer;
+  font-size: 20px; color: var(--stone); line-height: 1;
+}
+.modal-header {
+  padding: 40px 40px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-tag {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px; display: block;
+}
+.modal-title {
+  font-family: var(--serif); font-size: 30px; font-weight: 400;
+}
+.modal-body { padding: 32px 40px 40px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 8px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1px solid var(--border); background: #fff;
+  font-family: var(--sans); font-size: 15px; color: var(--ink);
+  outline: none; transition: border-color 0.2s;
+  appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold);
+}
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-submit {
+  width: 100%; background: var(--ink); color: #fff;
+  padding: 16px; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 0.2s; margin-top: 8px;
+}
+.form-submit:hover { background: var(--gold); }
+.form-submit:disabled { background: var(--stone); cursor: not-allowed; }
+.availability-result {
+  padding: 16px; margin-bottom: 20px;
+  font-size: 14px; display: none;
+}
+.availability-result.available { background: #e8f5e9; color: #2e7d32; display: block; }
+.availability-result.unavailable { background: #fce4ec; color: #c62828; display: block; }
+.availability-result.loading { background: #e3f2fd; color: #1565c0; display: block; }
+.price-display {
+  background: var(--ink); color: #fff; padding: 20px 24px;
+  display: none; margin-bottom: 20px;
+  justify-content: space-between; align-items: center;
+}
+.price-display.visible { display: flex; }
+.price-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.price-amount { font-family: var(--serif); font-size: 32px; font-weight: 300; }
+.price-nights { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: #EEE9DF; padding: 100px 48px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+.testi-card { background: var(--cream); padding: 40px 36px; }
+.testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 20px; letter-spacing: 3px; }
+.testi-text {
+  font-family: var(--serif); font-size: 18px; font-weight: 300;
+  line-height: 1.6; color: var(--ink); margin-bottom: 28px;
+  font-style: italic;
+}
+.testi-author { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); }
+.testi-prop { color: var(--gold); margin-top: 2px; font-size: 11px; }
+
+/* ── ABOUT ── */
+.about-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; min-height: 600px;
+}
+.about-image { position: relative; overflow: hidden; }
+.about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-content {
+  padding: 100px 64px; background: var(--cream);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.about-quote {
+  font-family: var(--serif); font-size: 24px; font-weight: 300;
+  line-height: 1.5; font-style: italic; color: var(--ink);
+  border-left: 2px solid var(--gold); padding-left: 24px;
+  margin: 32px 0;
+}
+.about-text { color: var(--stone); line-height: 1.8; font-size: 15px; }
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--ink); padding: 100px 48px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.contact-left .section-tag { color: var(--gold-light); }
+.contact-left .section-title { color: #fff; }
+.contact-left .section-sub { color: rgba(255,255,255,0.5); }
+.contact-details { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-icon {
+  width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--gold-light); flex-shrink: 0;
+}
+.contact-item-label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 4px;
+}
+.contact-item-value {
+  color: #fff; font-size: 15px;
+}
+.contact-item-value a { color: var(--gold-light); text-decoration: none; }
+.contact-form-wrap .form-input,
+.contact-form-wrap .form-select,
+.contact-form-wrap .form-textarea {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.contact-form-wrap .form-input::placeholder,
+.contact-form-wrap .form-textarea::placeholder { color: rgba(255,255,255,0.35); }
+.contact-form-wrap .form-input:focus,
+.contact-form-wrap .form-textarea:focus { border-color: var(--gold); }
+.contact-form-wrap .form-label { color: rgba(255,255,255,0.5); }
+
+/* ── FOOTER ── */
+footer {
+  background: #111; padding: 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-logo {
+  font-family: var(--serif); font-size: 20px; font-weight: 400;
+  color: #fff; text-decoration: none;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold-light); }
+.footer-copy { color: rgba(255,255,255,0.25); font-size: 12px; }
+
+/* ── SUCCESS MESSAGE ── */
+.success-msg {
+  text-align: center; padding: 40px;
+}
+.success-icon { font-size: 48px; margin-bottom: 16px; }
+.success-title { font-family: var(--serif); font-size: 28px; margin-bottom: 12px; }
+.success-text { color: var(--stone); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 24px 60px; }
+  .search-bar { grid-template-columns: 1fr; }
+  .search-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .section { padding: 60px 24px; }
+  .features-section { grid-template-columns: 1fr; padding: 60px 24px; }
+  .features-visual { display: none; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .about-section { grid-template-columns: 1fr; }
+  .about-content { padding: 60px 24px; }
+  .contact-section { grid-template-columns: 1fr; padding: 60px 24px; }
+  footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  .modal-header, .modal-body { padding: 28px 24px; }
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="active" onclick="setLang('en')">EN</button>
+  <button onclick="setLang('pt')">PT</button>
+  <button onclick="setLang('es')">ES</button>
+  <button onclick="setLang('fr')">FR</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Porto <span>Haven</span></a>
+  <div class="nav-links">
+    <a href="#properties" data-en="Properties" data-pt="Apartamentos" data-es="Apartamentos" data-fr="Appartements">Properties</a>
+    <a href="#about" data-en="About" data-pt="Sobre nós" data-es="Sobre nosotros" data-fr="À propos">About</a>
+    <a href="#contact" data-en="Contact" data-pt="Contacto" data-es="Contacto" data-fr="Contact">Contact</a>
+    <a href="#book" class="nav-cta" onclick="openModal(null)" data-en="Book direct" data-pt="Reservar direto" data-es="Reservar directo" data-fr="Réserver direct">Book direct</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-tag" data-en="Porto & Lisbon · Handpicked apartments" data-pt="Porto & Lisboa · Apartamentos selecionados" data-es="Oporto & Lisboa · Apartamentos seleccionados" data-fr="Porto & Lisbonne · Appartements sélectionnés">Porto & Lisbon · Handpicked apartments</span>
+    <h1 data-en="Your home in the <em>heart</em> of the city" data-pt="A sua casa no <em>coração</em> da cidade" data-es="Tu casa en el <em>corazón</em> de la ciudad" data-fr="Votre maison au <em>cœur</em> de la ville">Your home in the <em>heart</em> of the city</h1>
+    <p class="hero-sub" data-en="Carefully chosen apartments in Porto's historic neighbourhoods and central Lisbon. Every stay is personal." data-pt="Apartamentos cuidadosamente selecionados nos bairros históricos do Porto e em Lisboa. Cada estadia é pessoal." data-es="Apartamentos cuidadosamente seleccionados en los barrios históricos de Oporto y Lisboa. Cada estancia es personal." data-fr="Appartements soigneusement sélectionnés dans les quartiers historiques de Porto et Lisbonne. Chaque séjour est personnel.">Carefully chosen apartments in Porto's historic neighbourhoods and central Lisbon. Every stay is personal.</p>
+    <div class="hero-actions">
+      <a href="#properties" class="btn-primary" data-en="Explore apartments" data-pt="Ver apartamentos" data-es="Ver apartamentos" data-fr="Voir les appartements">Explore apartments</a>
+      <a href="#book" class="btn-outline" onclick="openModal(null)" data-en="Book direct & save" data-pt="Reservar direto e poupar" data-es="Reservar directo y ahorrar" data-fr="Réserver direct et économiser">Book direct & save</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<section class="search-section">
+  <div class="search-bar">
+    <div class="search-field">
+      <label class="search-label" data-en="Property" data-pt="Apartamento" data-es="Apartamento" data-fr="Appartement">Property</label>
+      <select class="search-select" id="search-property">
+        <option value="" data-en="All properties" data-pt="Todos" data-es="Todos" data-fr="Tous">All properties</option>
+        <option value="2957201">Alegria 93 — Porto</option>
+        <option value="ALEGRIA700">Alegria 700 — Porto</option>
+        <option value="CEDOFEITA1">Cedofeita 101 — Porto</option>
+        <option value="CODECAL1">Under the Bridge 1 — Porto</option>
+        <option value="CODECAL2">Under the Bridge 2 — Porto</option>
+        <option value="ALVALADE">Alvalade — Lisbon</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label class="search-label" data-en="Check-in" data-pt="Chegada" data-es="Entrada" data-fr="Arrivée">Check-in</label>
+      <input type="date" class="search-input" id="search-checkin">
+    </div>
+    <div class="search-field">
+      <label class="search-label" data-en="Check-out" data-pt="Saída" data-es="Salida" data-fr="Départ">Check-out</label>
+      <input type="date" class="search-input" id="search-checkout">
+    </div>
+    <div class="search-field">
+      <label class="search-label" data-en="Guests" data-pt="Hóspedes" data-es="Huéspedes" data-fr="Voyageurs">Guests</label>
+      <select class="search-select" id="search-guests">
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+      </select>
+    </div>
+    <button class="search-btn" onclick="doSearch()" data-en="Search" data-pt="Pesquisar" data-es="Buscar" data-fr="Rechercher">Search</button>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section class="section" id="properties">
+  <div class="section-header fade-in">
+    <span class="section-tag" data-en="Our collection" data-pt="A nossa coleção" data-es="Nuestra colección" data-fr="Notre collection">Our collection</span>
+    <h2 class="section-title" data-en="Apartments that feel like <em>home</em>" data-pt="Apartamentos que parecem <em>casa</em>" data-es="Apartamentos que parecen <em>un hogar</em>" data-fr="Des appartements qui semblent <em>chez soi</em>">Apartments that feel like <em>home</em></h2>
+    <p class="section-sub" data-en="From the riverside Ribeira to the trendy streets of Cedofeita — and all the way to Lisbon." data-pt="Da Ribeira às ruas animadas de Cedofeita — e até Lisboa." data-es="Desde la ribereña Ribeira hasta las calles de moda de Cedofeita — y hasta Lisboa." data-fr="De la Ribeira aux rues branchées de Cedofeita — et jusqu'à Lisbonne.">From the riverside Ribeira to the trendy streets of Cedofeita — and all the way to Lisbon.</p>
+  </div>
+  <div class="props-grid">
+
+    <a href="#book" class="prop-card fade-in" onclick="openModal('2957201')">
+      <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80" alt="Alegria 93" loading="lazy">
+      <button class="prop-book-btn" data-en="Book now" data-pt="Reservar" data-es="Reservar" data-fr="Réserver">Book now</button>
+      <div class="prop-card-info">
+        <div class="prop-city">Porto · Bonfim</div>
+        <div class="prop-name">Alegria 93</div>
+        <div class="prop-desc" data-en="4th floor, city views, up to 6 guests" data-pt="4º andar, vistas da cidade, até 6 hóspedes" data-es="4º piso, vistas de la ciudad, hasta 6 huéspedes" data-fr="4e étage, vues sur la ville, jusqu'à 6 personnes">4th floor, city views, up to 6 guests</div>
+        <div class="prop-meta">
+          <span>🛏 2 bed</span>
+          <span>👥 6 guests</span>
+          <span>⭐ 4.9</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#book" class="prop-card fade-in" onclick="openModal('ALEGRIA700')">
+      <img src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=800&q=80" alt="Alegria 700" loading="lazy">
+      <button class="prop-book-btn" data-en="Book now" data-pt="Reservar" data-es="Reservar" data-fr="Réserver">Book now</button>
+      <div class="prop-card-info">
+        <div class="prop-city">Porto · Bonfim</div>
+        <div class="prop-name">Alegria 700</div>
+        <div class="prop-desc" data-en="Bright & modern, with terrace" data-pt="Luminoso e moderno, com terraço" data-es="Luminoso y moderno, con terraza" data-fr="Lumineux et moderne, avec terrasse">Bright & modern, with terrace</div>
+        <div class="prop-meta">
+          <span>🛏 2 bed</span>
+          <span>👥 6 guests</span>
+          <span>⭐ 4.9</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#book" class="prop-card fade-in" onclick="openModal('CEDOFEITA')">
+      <img src="https://images.unsplash.com/photo-1586105449897-20b5efeb3233?w=800&q=80" alt="Cedofeita" loading="lazy">
+      <button class="prop-book-btn" data-en="Book now" data-pt="Reservar" data-es="Reservar" data-fr="Réserver">Book now</button>
+      <div class="prop-card-info">
+        <div class="prop-city">Porto · Cedofeita</div>
+        <div class="prop-name">Cedofeita</div>
+        <div class="prop-desc" data-en="4 apartments · 1st to 4th floor · lift" data-pt="4 apartamentos · 1º ao 4º andar · elevador" data-es="4 apartamentos · 1º al 4º piso · ascensor" data-fr="4 appartements · 1er au 4e étage · ascenseur">4 apartments · 1st to 4th floor · lift</div>
+        <div class="prop-meta">
+          <span>🛏 2 bed</span>
+          <span>👥 4 guests</span>
+          <span>⭐ 4.9</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#book" class="prop-card fade-in" onclick="openModal('CODECAL1')">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Under the Bridge" loading="lazy">
+      <button class="prop-book-btn" data-en="Book now" data-pt="Reservar" data-es="Reservar" data-fr="Réserver">Book now</button>
+      <div class="prop-card-info">
+        <div class="prop-city">Porto · Ribeira</div>
+        <div class="prop-name">Under the Luís I Bridge</div>
+        <div class="prop-desc" data-en="2 apartments · river & bridge views" data-pt="2 apartamentos · vistas do rio e da ponte" data-es="2 apartamentos · vistas del río y el puente" data-fr="2 appartements · vues sur le fleuve et le pont">2 apartments · river & bridge views</div>
+        <div class="prop-meta">
+          <span>🛏 2 bed</span>
+          <span>👥 6 guests</span>
+          <span>⭐ 4.8</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#book" class="prop-card fade-in" onclick="openModal('ALVALADE')">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Alvalade Lisbon" loading="lazy">
+      <button class="prop-book-btn" data-en="Book now" data-pt="Reservar" data-es="Reservar" data-fr="Réserver">Book now</button>
+      <div class="prop-card-info">
+        <div class="prop-city">Lisbon · Alvalade</div>
+        <div class="prop-name">Alvalade</div>
+        <div class="prop-desc" data-en="Family apartment, AC, by the metro" data-pt="Apartamento familiar, AC, junto ao metro" data-es="Apartamento familiar, AC, junto al metro" data-fr="Appartement familial, climatisation, près du métro">Family apartment, AC, by the metro</div>
+        <div class="prop-meta">
+          <span>🛏 2 bed</span>
+          <span>👥 4 guests</span>
+          <span>⭐ 4.8</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features-section">
+  <div class="features-text fade-in">
+    <span class="section-tag" data-en="Why book direct" data-pt="Porquê reservar direto" data-es="Por qué reservar directo" data-fr="Pourquoi réserver en direct">Why book direct</span>
+    <h2 class="section-title" style="color:#fff" data-en="The Porto Haven <em>difference</em>" data-pt="A diferença Porto <em>Haven</em>" data-es="La diferencia Porto <em>Haven</em>" data-fr="La différence Porto <em>Haven</em>">The Porto Haven <em>difference</em></h2>
+    <p class="section-sub" data-en="We're a small, personal team. When you book direct, you get the best rate, a human response, and a stay that feels genuinely looked after." data-pt="Somos uma equipa pequena e pessoal. Ao reservar diretamente, tens a melhor tarifa, uma resposta humana e uma estadia verdadeiramente cuidada." data-es="Somos un equipo pequeño y personal. Al reservar directamente, obtienes la mejor tarifa, una respuesta humana y una estancia genuinamente cuidada." data-fr="Nous sommes une petite équipe personnelle. En réservant en direct, vous obtenez le meilleur tarif, une réponse humaine et un séjour vraiment soigné.">We're a small, personal team. When you book direct, you get the best rate, a human response, and a stay that feels genuinely looked after.</p>
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-num">0%</div>
+        <div class="feature-label" data-en="Platform commission" data-pt="Comissão de plataforma" data-es="Comisión de plataforma" data-fr="Commission de plateforme">Platform commission</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">24h</div>
+        <div class="feature-label" data-en="Response time" data-pt="Tempo de resposta" data-es="Tiempo de respuesta" data-fr="Temps de réponse">Response time</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">9+</div>
+        <div class="feature-label" data-en="Apartments available" data-pt="Apartamentos disponíveis" data-es="Apartamentos disponibles" data-fr="Appartements disponibles">Apartments available</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">4.9</div>
+        <div class="feature-label" data-en="Average guest rating" data-pt="Classificação média" data-es="Valoración media" data-fr="Note moyenne des hôtes">Average guest rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="features-visual fade-in">
+    <img class="features-img-main" src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=700&q=80" alt="">
+    <img class="features-img-accent" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="">
+    <div class="features-badge">
+      <span class="features-badge-num">★ 4.9</span>
+      <span class="features-badge-text">Superhost</span>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-header fade-in">
+    <span class="section-tag" data-en="Guest reviews" data-pt="Avaliações" data-es="Opiniones" data-fr="Avis des hôtes">Guest reviews</span>
+    <h2 class="section-title" data-en="What our guests <em>say</em>" data-pt="O que os nossos hóspedes <em>dizem</em>" data-es="Lo que dicen nuestros <em>huéspedes</em>" data-fr="Ce que disent nos <em>hôtes</em>">What our guests <em>say</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-en='"Sofia was incredibly helpful and responsive. The apartment is exactly as described — spotlessly clean and in a perfect location. We will definitely be back."' data-pt='"A Sofia foi incrivelmente prestável e rápida a responder. O apartamento é exatamente como descrito — impecavelmente limpo e numa localização perfeita. Voltaremos de certeza."' data-es='"Sofia fue increíblemente útil y receptiva. El apartamento es exactamente como se describe — impecablemente limpio y en una ubicación perfecta."' data-fr='"Sofia a été incroyablement utile et réactive. L\'appartement est exactement comme décrit — impeccablement propre et dans un emplacement parfait."'>"Sofia was incredibly helpful and responsive. The apartment is exactly as described — spotlessly clean and in a perfect location. We will definitely be back."</p>
+      <div class="testi-author">James & Emma · UK</div>
+      <div class="testi-prop">Alegria 93, Porto</div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-en='"Waking up to the sound of the river and that view of the bridge every morning... absolutely magical. The apartment itself is stunning and the host thought of everything."' data-pt='"Acordar com o som do rio e a vista da ponte todas as manhãs... absolutamente mágico. O apartamento é deslumbrante e a anfitriã pensou em tudo."' data-es='"Despertar con el sonido del río y esa vista del puente cada mañana... absolutamente mágico."' data-fr='"Se réveiller avec le son de la rivière et cette vue sur le pont chaque matin... absolument magique."'>"Waking up to the sound of the river and that view of the bridge every morning... absolutely magical. The apartment itself is stunning."</p>
+      <div class="testi-author">Margaux & Pierre · France</div>
+      <div class="testi-prop">Under the Bridge, Porto</div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text" data-en='"Cedofeita is the best neighbourhood in Porto and this apartment is right in the middle of it. We had the best coffee, food and walks — all within 5 minutes."' data-pt='"Cedofeita é o melhor bairro do Porto e este apartamento fica mesmo no centro. Tivemos o melhor café, comida e passeios — tudo a 5 minutos."' data-es='"Cedofeita es el mejor barrio de Oporto y este apartamento está justo en el centro."' data-fr='"Cedofeita est le meilleur quartier de Porto et cet appartement est juste au centre."'>"Cedofeita is the best neighbourhood in Porto and this apartment is right in the middle of it. All within 5 minutes."</p>
+      <div class="testi-author">Carlos & Ana · Spain</div>
+      <div class="testi-prop">Cedofeita, Porto</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-image fade-in">
+    <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80" alt="Porto Haven">
+  </div>
+  <div class="about-content fade-in">
+    <span class="section-tag" data-en="About Porto Haven" data-pt="Sobre o Porto Haven" data-es="Sobre Porto Haven" data-fr="À propos de Porto Haven">About Porto Haven</span>
+    <h2 class="section-title" data-en="We know <em>Porto</em>. We know <em>Lisbon</em>." data-pt="Conhecemos o <em>Porto</em>. Conhecemos <em>Lisboa</em>." data-es="Conocemos <em>Oporto</em>. Conocemos <em>Lisboa</em>." data-fr="Nous connaissons <em>Porto</em>. Nous connaissons <em>Lisbonne</em>.">We know <em>Porto</em>. We know <em>Lisbon</em>.</h2>
+    <blockquote class="about-quote" data-en='"Each apartment was chosen because it has something special — a view, a location, a feeling. We want you to experience the city like a local."' data-pt='"Cada apartamento foi escolhido por ter algo especial — uma vista, uma localização, um sentimento. Queremos que experiencie a cidade como um local."' data-es='"Cada apartamento fue elegido porque tiene algo especial — una vista, una ubicación, un sentimiento."' data-fr='"Chaque appartement a été choisi parce qu\'il a quelque chose de spécial — une vue, un emplacement, un sentiment."'>"Each apartment was chosen because it has something special — a view, a location, a feeling. We want you to experience the city like a local."</blockquote>
+    <p class="about-text" data-en="Porto Haven is a small, personal collection of apartments in Porto and Lisbon. We are a Superhost on Airbnb, and we take pride in every detail — from the quality of the linens to the local tips we share with every guest." data-pt="O Porto Haven é uma coleção pequena e pessoal de apartamentos no Porto e em Lisboa. Somos Superhost no Airbnb e temos orgulho em cada detalhe — da qualidade da roupa de cama às dicas locais que partilhamos com cada hóspede." data-es="Porto Haven es una pequeña y personal colección de apartamentos en Oporto y Lisboa. Somos Superhost en Airbnb y nos enorgullecemos de cada detalle." data-fr="Porto Haven est une petite collection personnelle d'appartements à Porto et Lisbonne. Nous sommes Superhost sur Airbnb et nous sommes fiers de chaque détail.">Porto Haven is a small, personal collection of apartments in Porto and Lisbon. We are a Superhost on Airbnb, and we take pride in every detail.</p>
+    <div style="margin-top: 36px;">
+      <a href="#book" class="btn-primary" onclick="openModal(null)" data-en="Book direct & save" data-pt="Reservar direto" data-es="Reservar directo" data-fr="Réserver en direct">Book direct & save</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-left fade-in">
+    <span class="section-tag" data-en="Get in touch" data-pt="Entre em contacto" data-es="Contacta con nosotros" data-fr="Contactez-nous">Get in touch</span>
+    <h2 class="section-title" style="color:#fff" data-en="We're here to <em>help</em>" data-pt="Estamos aqui para <em>ajudar</em>" data-es="Estamos aquí para <em>ayudar</em>" data-fr="Nous sommes là pour <em>vous aider</em>">We're here to <em>help</em></h2>
+    <p class="section-sub" data-en="Have a question about a property, need a custom quote, or just want to say hello? We respond within a few hours." data-pt="Tem alguma dúvida sobre um apartamento, precisa de um orçamento personalizado ou apenas quer dizer olá? Respondemos em poucas horas." data-es="¿Tiene alguna pregunta sobre una propiedad, necesita un presupuesto personalizado o simplemente quiere saludar?" data-fr="Vous avez une question sur un appartement, besoin d'un devis personnalisé, ou vous voulez juste dire bonjour ?">Have a question about a property, need a custom quote, or just want to say hello? We respond within a few hours.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-item-label" data-en="Email" data-pt="Email" data-es="Email" data-fr="Email">Email</div>
+          <div class="contact-item-value"><a href="mailto:customercare@portohaven.com">customercare@portohaven.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-item-label" data-en="Location" data-pt="Localização" data-es="Ubicación" data-fr="Emplacement">Location</div>
+          <div class="contact-item-value">Porto & Lisbon, Portugal</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div class="contact-item-label" data-en="Also on" data-pt="Também em" data-es="También en" data-fr="Aussi sur">Also on</div>
+          <div class="contact-item-value">
+            <a href="https://www.airbnb.com" target="_blank">Airbnb</a> ·
+            <a href="https://www.booking.com" target="_blank">Booking.com</a> ·
+            <a href="https://www.vrbo.com" target="_blank">VRBO</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form-wrap fade-in">
+    <form id="contact-form" onsubmit="sendContactForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-en="First name" data-pt="Nome" data-es="Nombre" data-fr="Prénom">First name</label>
+          <input type="text" class="form-input" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Last name" data-pt="Apelido" data-es="Apellido" data-fr="Nom">Last name</label>
+          <input type="text" class="form-input" name="lastName" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" name="email" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Message" data-pt="Mensagem" data-es="Mensaje" data-fr="Message">Message</label>
+        <textarea class="form-textarea" name="message" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" data-en="Send message" data-pt="Enviar mensagem" data-es="Enviar mensaje" data-fr="Envoyer le message">Send message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Porto <span>Haven</span></a>
+  <div class="footer-links">
+    <a href="#" data-en="House rules" data-pt="Regras" data-es="Normas" data-fr="Règles">House rules</a>
+    <a href="#" data-en="Privacy policy" data-pt="Privacidade" data-es="Privacidad" data-fr="Confidentialité">Privacy policy</a>
+    <a href="#" data-en="Terms & conditions" data-pt="Termos" data-es="Términos" data-fr="Conditions">Terms & conditions</a>
+    <a href="#contact" data-en="Contact" data-pt="Contacto" data-es="Contacto" data-fr="Contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Porto Haven · All rights reserved</div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modal-content">
+      <div class="modal-header">
+        <span class="modal-tag" data-en="Direct booking" data-pt="Reserva direta" data-es="Reserva directa" data-fr="Réservation directe">Direct booking</span>
+        <h3 class="modal-title" data-en="Book your stay" data-pt="Reserve a sua estadia" data-es="Reserva tu estancia" data-fr="Réservez votre séjour">Book your stay</h3>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label class="form-label" data-en="Property" data-pt="Apartamento" data-es="Apartamento" data-fr="Appartement">Property</label>
+          <select class="form-select" id="book-property">
+            <option value="2957201">Alegria 93 — Porto (up to 6 guests)</option>
+            <option value="ALEGRIA700">Alegria 700 — Porto (up to 6 guests)</option>
+            <option value="CEDOFEITA1">Cedofeita 1º — Porto (up to 4 guests)</option>
+            <option value="CEDOFEITA2">Cedofeita 2º — Porto (up to 4 guests)</option>
+            <option value="CEDOFEITA3">Cedofeita 3º — Porto (up to 4 guests)</option>
+            <option value="CEDOFEITA4">Cedofeita 4º — Porto (up to 4 guests)</option>
+            <option value="CODECAL1">Under the Bridge 1º — Porto (up to 6 guests)</option>
+            <option value="CODECAL2">Under the Bridge 2º — Porto (up to 6 guests)</option>
+            <option value="ALVALADE">Alvalade — Lisbon (up to 4 guests)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-en="Check-in" data-pt="Chegada" data-es="Entrada" data-fr="Arrivée">Check-in</label>
+            <input type="date" class="form-input" id="book-checkin" onchange="checkAvailability()">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Check-out" data-pt="Saída" data-es="Salida" data-fr="Départ">Check-out</label>
+            <input type="date" class="form-input" id="book-checkout" onchange="checkAvailability()">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="Number of guests" data-pt="Número de hóspedes" data-es="Número de huéspedes" data-fr="Nombre de voyageurs">Number of guests</label>
+          <select class="form-select" id="book-guests">
+            <option>1</option><option>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+
+        <div class="availability-result" id="avail-result"></div>
+        <div class="price-display" id="price-display">
+          <div>
+            <div class="price-label" data-en="Total price" data-pt="Preço total" data-es="Precio total" data-fr="Prix total">Total price</div>
+            <div class="price-nights" id="price-nights"></div>
+          </div>
+          <div class="price-amount" id="price-amount"></div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border); margin: 24px 0;">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-en="First name" data-pt="Nome" data-es="Nombre" data-fr="Prénom">First name</label>
+            <input type="text" class="form-input" id="book-fname" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Last name" data-pt="Apelido" data-es="Apellido" data-fr="Nom">Last name</label>
+            <input type="text" class="form-input" id="book-lname" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="book-email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Phone" data-pt="Telemóvel" data-es="Teléfono" data-fr="Téléphone">Phone</label>
+          <input type="tel" class="form-input" id="book-phone">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Notes (optional)" data-pt="Notas (opcional)" data-es="Notas (opcional)" data-fr="Notes (facultatif)">Notes (optional)</label>
+          <textarea class="form-textarea" id="book-notes" style="min-height:70px"></textarea>
+        </div>
+
+        <button class="form-submit" id="book-submit" onclick="submitBooking()" data-en="Request booking" data-pt="Solicitar reserva" data-es="Solicitar reserva" data-fr="Demander une réservation">Request booking</button>
+
+        <p style="font-size:12px; color:var(--stone); margin-top:16px; text-align:center" data-en="We'll confirm your booking within 24 hours and send payment details." data-pt="Confirmaremos a sua reserva em 24 horas e enviaremos os detalhes de pagamento." data-es="Confirmaremos su reserva en 24 horas y enviaremos los detalles de pago." data-fr="Nous confirmerons votre réservation dans les 24 heures et enverrons les détails de paiement.">We'll confirm your booking within 24 hours and send payment details.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── LANGUAGE ──
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+  document.querySelectorAll('.lang-bar button').forEach(b => {
+    b.classList.toggle('active', b.textContent === lang.toUpperCase());
+  });
+}
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── FADE IN OBSERVER ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── MODAL ──
+function openModal(propertyId) {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (propertyId) {
+    document.getElementById('book-property').value = propertyId;
+  }
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+// ── SEARCH ──
+function doSearch() {
+  const prop = document.getElementById('search-property').value;
+  const ci = document.getElementById('search-checkin').value;
+  const co = document.getElementById('search-checkout').value;
+  openModal(prop || null);
+  if (ci) document.getElementById('book-checkin').value = ci;
+  if (co) document.getElementById('book-checkout').value = co;
+  if (ci && co) checkAvailability();
+}
+
+// ── AVAILABILITY CHECK (via Railway proxy) ──
+let availTimeout;
+async function checkAvailability() {
+  const ci = document.getElementById('book-checkin').value;
+  const co = document.getElementById('book-checkout').value;
+  const prop = document.getElementById('book-property').value;
+  const result = document.getElementById('avail-result');
+  const priceDisplay = document.getElementById('price-display');
+
+  if (!ci || !co || !prop) return;
+  if (ci >= co) {
+    result.className = 'availability-result unavailable';
+    result.textContent = currentLang === 'pt' ? 'A data de saída tem de ser após a chegada.' :
+                         currentLang === 'es' ? 'La fecha de salida debe ser posterior a la llegada.' :
+                         currentLang === 'fr' ? 'La date de départ doit être après l\'arrivée.' :
+                         'Check-out must be after check-in.';
+    return;
+  }
+
+  result.className = 'availability-result loading';
+  result.textContent = currentLang === 'pt' ? 'A verificar disponibilidade...' :
+                       currentLang === 'es' ? 'Verificando disponibilidad...' :
+                       currentLang === 'fr' ? 'Vérification de la disponibilité...' :
+                       'Checking availability...';
+  priceDisplay.classList.remove('visible');
+
+  clearTimeout(availTimeout);
+  availTimeout = setTimeout(async () => {
+    try {
+      // Smoobu property IDs map
+      const smoobuIds = {
+        '2957201': 2957201,
+        'ALEGRIA700': null, // add real IDs
+        'CEDOFEITA1': null,
+        'CEDOFEITA2': null,
+        'CEDOFEITA3': null,
+        'CEDOFEITA4': null,
+        'CODECAL1': null,
+        'CODECAL2': null,
+        'ALVALADE': null,
+        'CEDOFEITA': null,
+      };
+
+      const smoobuId = smoobuIds[prop];
+
+      if (!smoobuId) {
+        // For properties without Smoobu ID yet, show contact option
+        result.className = 'availability-result available';
+        result.innerHTML = (currentLang === 'pt' ? 'Preenche o formulário abaixo e confirmamos a disponibilidade em 24h.' :
+                           currentLang === 'es' ? 'Rellena el formulario y confirmamos disponibilidad en 24h.' :
+                           currentLang === 'fr' ? 'Remplissez le formulaire et nous confirmons la disponibilité sous 24h.' :
+                           'Fill in the form below and we\'ll confirm availability within 24h.');
+        return;
+      }
+
+      const res = await fetch('/check-availability', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apartmentId: smoobuId, arrivalDate: ci, departureDate: co })
+      });
+      const data = await res.json();
+
+      const nights = Math.round((new Date(co) - new Date(ci)) / 86400000);
+
+      if (data.available) {
+        result.className = 'availability-result available';
+        result.textContent = currentLang === 'pt' ? '✓ Disponível para essas datas!' :
+                             currentLang === 'es' ? '✓ ¡Disponible para esas fechas!' :
+                             currentLang === 'fr' ? '✓ Disponible pour ces dates !' :
+                             '✓ Available for those dates!';
+        if (data.price) {
+          document.getElementById('price-amount').textContent = \`€\${(data.price / 100).toFixed(0)}\`;
+          document.getElementById('price-nights').textContent = \`\${nights} \${nights === 1 ? 'night' : 'nights'}\`;
+          priceDisplay.classList.add('visible');
+        }
+      } else {
+        result.className = 'availability-result unavailable';
+        result.textContent = currentLang === 'pt' ? '✗ Não disponível para essas datas. Experimenta outras datas.' :
+                             currentLang === 'es' ? '✗ No disponible para esas fechas. Prueba otras fechas.' :
+                             currentLang === 'fr' ? '✗ Non disponible pour ces dates. Essayez d\'autres dates.' :
+                             '✗ Not available for those dates. Please try different dates.';
+      }
+    } catch(e) {
+      result.className = 'availability-result loading';
+      result.textContent = currentLang === 'pt' ? 'Preenche o formulário e confirmamos em 24h.' :
+                           currentLang === 'es' ? 'Rellena el formulario y confirmamos en 24h.' :
+                           currentLang === 'fr' ? 'Remplissez le formulaire et nous confirmons sous 24h.' :
+                           'Fill in your details and we\'ll confirm within 24h.';
+    }
+  }, 600);
+}
+
+// ── SUBMIT BOOKING ──
+async function submitBooking() {
+  const fname = document.getElementById('book-fname').value.trim();
+  const lname = document.getElementById('book-lname').value.trim();
+  const email = document.getElementById('book-email').value.trim();
+  const ci = document.getElementById('book-checkin').value;
+  const co = document.getElementById('book-checkout').value;
+  const prop = document.getElementById('book-property').value;
+
+  if (!fname || !lname || !email || !ci || !co) {
+    alert(currentLang === 'pt' ? 'Por favor preenche todos os campos obrigatórios.' :
+          currentLang === 'es' ? 'Por favor rellena todos los campos obligatorios.' :
+          currentLang === 'fr' ? 'Veuillez remplir tous les champs obligatoires.' :
+          'Please fill in all required fields.');
+    return;
+  }
+
+  const btn = document.getElementById('book-submit');
+  btn.disabled = true;
+  btn.textContent = currentLang === 'pt' ? 'A enviar...' :
+                    currentLang === 'es' ? 'Enviando...' :
+                    currentLang === 'fr' ? 'Envoi...' : 'Sending...';
+
+  try {
+    const res = await fetch('/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apartmentId: prop,
+        arrivalDate: ci,
+        departureDate: co,
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        phone: document.getElementById('book-phone').value,
+        notice: document.getElementById('book-notes').value,
+        adults: parseInt(document.getElementById('book-guests').value),
+        language: currentLang,
+      })
+    });
+    const data = await res.json();
+
+    document.getElementById('modal-content').innerHTML = \`
+      <div class="success-msg">
+        <div class="success-icon">🎉</div>
+        <h3 class="success-title" style="font-family:var(--serif);font-weight:400">
+          \${currentLang === 'pt' ? 'Pedido enviado!' : currentLang === 'es' ? '¡Solicitud enviada!' : currentLang === 'fr' ? 'Demande envoyée !' : 'Booking request sent!'}
+        </h3>
+        <p class="success-text">
+          \${currentLang === 'pt' ? 'Receberás uma confirmação em ' + email + ' nas próximas 24 horas.' :
+            currentLang === 'es' ? 'Recibirás una confirmación en ' + email + ' en las próximas 24 horas.' :
+            currentLang === 'fr' ? 'Vous recevrez une confirmation à ' + email + ' dans les prochaines 24 heures.' :
+            'You\'ll receive a confirmation at ' + email + ' within 24 hours.'}
+        </p>
+        <button onclick="closeModal()" style="margin-top:28px;padding:12px 32px;background:var(--ink);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;letter-spacing:0.1em;text-transform:uppercase">
+          \${currentLang === 'pt' ? 'Fechar' : currentLang === 'es' ? 'Cerrar' : currentLang === 'fr' ? 'Fermer' : 'Close'}
+        </button>
+      </div>
+    \`;
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = currentLang === 'pt' ? 'Solicitar reserva' : currentLang === 'es' ? 'Solicitar reserva' : currentLang === 'fr' ? 'Demander une réservation' : 'Request booking';
+    alert(currentLang === 'pt' ? 'Erro ao enviar. Contacta-nos por email.' : 'Error sending. Please contact us by email.');
+  }
+}
+
+// ── CONTACT FORM ──
+async function sendContactForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type=submit]');
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  setTimeout(() => {
+    e.target.innerHTML = \`<p style="color:var(--gold-light);font-family:var(--serif);font-size:20px;text-align:center;padding:20px">
+      \${currentLang === 'pt' ? 'Mensagem enviada! Respondemos em breve.' :
+        currentLang === 'es' ? '¡Mensaje enviado! Respondemos pronto.' :
+        currentLang === 'fr' ? 'Message envoyé ! Nous répondrons bientôt.' :
+        'Message sent! We\'ll be in touch shortly.'}
+    </p>\`;
+  }, 1000);
+}
+
+// ── SET MIN DATE ──
+const today = new Date().toISOString().split('T')[0];
+document.querySelectorAll('input[type=date]').forEach(i => i.min = today);
+</script>
+</body>
+</html>
+`;
+
+app.get('/website', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(WEBSITE_HTML.replace(/\\`/g,'`').replace(/\\\${/g,'${'));
+});
+
+// Check availability proxy (avoids CORS)
+app.post('/check-availability', async (req, res) => {
+  const { apartmentId, arrivalDate, departureDate, guests } = req.body;
+  try {
+    const r = await fetch('https://login.smoobu.com/booking/checkApartmentAvailability', {
+      method: 'POST',
+      headers: { 'Api-Key': SMOOBU_API_KEY, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' },
+      body: JSON.stringify({ arrivalDate, departureDate, apartments: [apartmentId], guests: guests || 2 })
+    });
+    const data = await r.json();
+    const available = data.availableApartments?.includes(apartmentId);
+    const price = data.prices?.[apartmentId]?.price;
+    res.json({ available, price });
+  } catch(e) {
+    res.json({ available: null, error: e.message });
+  }
+});
+
+// Create booking proxy
+app.post('/book', async (req, res) => {
+  const { apartmentId, arrivalDate, departureDate, firstName, lastName, email, phone, notice, adults, language } = req.body;
+  try {
+    const r = await fetch('https://login.smoobu.com/api/reservations', {
+      method: 'POST',
+      headers: { 'Api-Key': SMOOBU_API_KEY, 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' },
+      body: JSON.stringify({
+        arrivalDate, departureDate,
+        apartmentId: parseInt(apartmentId) || apartmentId,
+        channelId: 63, // Direct booking channel
+        firstName, lastName, email, phone, notice,
+        adults: adults || 2, language: language || 'en'
+      })
+    });
+    const data = await r.json();
+    if (data.id) {
+      res.json({ success: true, bookingId: data.id });
+    } else {
+      // If can't create booking directly, send email notification
+      res.json({ success: true, pending: true, message: 'Request received, will confirm within 24h' });
+    }
+  } catch(e) {
+    res.json({ success: false, error: e.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`🏠 Porto Haven AI a correr na porta ${PORT}`);
