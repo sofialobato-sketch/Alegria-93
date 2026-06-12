@@ -6,7 +6,6 @@ app.use(express.static('public'));
 const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
-const APARTMENT_ID = 2957201;
 const lastSeenMessageId = {};
 
 const APARTMENT_SYSTEM_PROMPT = `
@@ -457,7 +456,7 @@ async function getActiveBookings() {
   const today = new Date().toISOString().split('T')[0];
   const future90 = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   const response = await fetch(
-    `https://login.smoobu.com/api/reservations?apartmentId=${APARTMENT_ID}&departureFrom=${today}&arrivalTo=${future90}&pageSize=50`,
+    `https://login.smoobu.com/api/reservations?departureFrom=${today}&arrivalTo=${future90}&pageSize=100`,
     { headers: { 'Api-Key': SMOOBU_API_KEY, 'Cache-Control': 'no-cache' } }
   );
   return response.json();
@@ -652,6 +651,9 @@ function needsEscalation(aiResponse) {
   return phrases.some(p => aiResponse.toLowerCase().includes(p.toLowerCase()));
 }
 
+const BLOCKED_IDS = [2953271, 2953281, 2953276, 3355792, 3355827, 3355822, 3353807, 2966626, 2966651, 2966656, 2957411];
+const ALLOWED_IDS  = [2957201, 2957176, 2957206, 3316237, 3353797, 3353802, 3353782, 3355817, 3355842, 3355837, 3355832, 2966641, 2966646];
+
 async function checkNewMessages() {
   console.log('🔍 A verificar mensagens novas...');
   try {
@@ -661,18 +663,12 @@ async function checkNewMessages() {
     for (const booking of bookings) {
       const propId = booking.apartment?.id || booking.apartmentId;
 
-      // Propriedades com outro co-host — NUNCA responder
-      const BLOCKED_IDS = [2953271, 2953276, 2953281, 2966626, 2966651, 2966656, 2957411]; // Alegria 248 T3, T2, T1 + outros co-hosts
       if (BLOCKED_IDS.includes(propId)) {
-        console.log(`🚫 Reserva ${booking.id} bloqueada (Alegria 248 — outro co-host)`);
+        console.log(`🚫 Reserva ${booking.id} ignorada (co-host, propId: ${propId})`);
         continue;
       }
-
-      // Só responde a propriedades autorizadas
-      // Adicionar IDs do Alegria 700, Codeçal 1, Codeçal 2 e Alvalade quando disponíveis
-      const ALLOWED_IDS = [APARTMENT_ID, 2957176, 2966641, 2966646, 2957206]; // Alegria 93, Alegria 700, Codeçal 1, Codeçal 2, Alvalade
       if (!ALLOWED_IDS.includes(propId)) {
-        console.log(`⏭️ A ignorar reserva ${booking.id} (propriedade ${propId} — não está na lista de propriedades autorizadas)`);
+        console.log(`⏭️ A ignorar reserva ${booking.id} (propriedade ${propId} — não autorizada)`);
         continue;
       }
 
@@ -5069,5 +5065,5 @@ app.listen(PORT, () => {
   console.log(`📖 Codeçal 1º: /guia-codecal-1`);
   console.log(`📖 Codeçal 2º: /guia-codecal-2`);
   console.log(`📖 Alvalade: /guia-alvalade`);
-  console.log(`🔄 Polling ativo — Alegria 93 (ID: ${APARTMENT_ID})`);
+  console.log(`🔄 Polling ativo — ${ALLOWED_IDS.length} propriedades`);
 });
