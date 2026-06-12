@@ -820,11 +820,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="section-body">
       <div class="wifi-box">
         <div class="wifi-label" data-en="Network" data-pt="Rede" data-es="Red" data-fr="Réseau">Network</div>
-        <div class="wifi-value">Abacatur 1</div>
+        <div class="wifi-value">PHabacatur1</div>
       </div>
       <div class="wifi-box">
         <div class="wifi-label">Password</div>
-        <div class="wifi-value">@PHabacatur1*</div>
+        <div class="wifi-value">@PHabacatur1#</div>
       </div>
     </div>
   </div>
@@ -1238,11 +1238,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="section-body">
       <div class="wifi-box">
         <div class="wifi-label" data-en="Network" data-pt="Rede" data-es="Red" data-fr="Réseau">Network</div>
-        <div class="wifi-value">Abacatur 2</div>
+        <div class="wifi-value">PHabacatur2</div>
       </div>
       <div class="wifi-box">
         <div class="wifi-label">Password</div>
-        <div class="wifi-value">@PHabacatur2_</div>
+        <div class="wifi-value">@PHabacatur2$</div>
       </div>
     </div>
   </div>
@@ -1651,11 +1651,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="section-body">
       <div class="wifi-box">
         <div class="wifi-label" data-en="Network" data-pt="Rede" data-es="Red" data-fr="Réseau">Network</div>
-        <div class="wifi-value">Abacatur 3</div>
+        <div class="wifi-value">PHabacatur3</div>
       </div>
       <div class="wifi-box">
         <div class="wifi-label">Password</div>
-        <div class="wifi-value">@PHabacatur3*</div>
+        <div class="wifi-value">@PHabacatur3!</div>
       </div>
     </div>
   </div>
@@ -2064,11 +2064,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="section-body">
       <div class="wifi-box">
         <div class="wifi-label" data-en="Network" data-pt="Rede" data-es="Red" data-fr="Réseau">Network</div>
-        <div class="wifi-value">Abacatur 4</div>
+        <div class="wifi-value">PHabacatur4</div>
       </div>
       <div class="wifi-box">
         <div class="wifi-label">Password</div>
-        <div class="wifi-value">@PHabacatur4_</div>
+        <div class="wifi-value">@PHabacatur4*</div>
       </div>
     </div>
   </div>
