@@ -6,7 +6,7 @@ app.use(express.static('public'));
 const SMOOBU_API_KEY = process.env.SMOOBU_API_KEY || 'A_TUA_API_KEY_AQUI';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || 'A_TUA_ANTHROPIC_KEY_AQUI';
 const PORT = process.env.PORT || 3000;
-const lastSeenMessageId = {};
+const lastSeenMessageId = {}
 
 const APARTMENT_SYSTEM_PROMPT = `
 És um assistente virtual simpático e profissional do apartamento "Alegria 93", situado na Rua da Alegria, 93, 4.º andar, Porto, Portugal.
@@ -636,7 +636,7 @@ async function generateAIResponse(guestMessage, conversationHistory = [], apartm
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1000,
       system: systemPrompt,
       messages,
