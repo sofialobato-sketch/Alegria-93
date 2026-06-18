@@ -754,8 +754,14 @@ async function checkNewMessages() {
   }
 }
 
-setInterval(checkNewMessages, 60 * 1000);
-setTimeout(checkNewMessages, 3000);
+const BOT_ENABLED = process.env.BOT_ENABLED !== 'false';
+if (BOT_ENABLED) {
+  setInterval(checkNewMessages, 60 * 1000);
+  setTimeout(checkNewMessages, 3000);
+  console.log('✅ Bot polling ACTIVO');
+} else {
+  console.log('⏸ Bot polling PAUSADO (BOT_ENABLED=false). Servidor e guias digitais continuam activos.');
+}
 
 app.post('/webhook', (req, res) => res.json({ status: 'received' }));
 
